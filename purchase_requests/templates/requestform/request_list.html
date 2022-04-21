@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Purchasing Requests{% endblock %}
+
+{% block content %}
+  <h1>Purchase Requests</h1>
+  <ul>
+    {% for request in request_list %}
+      <li>{{ request.creator_name }} - {{ request.creator_email }}</li>
+    {% empty %}
+      <li>No requests yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock content %}
