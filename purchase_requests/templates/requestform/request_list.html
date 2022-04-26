@@ -3,12 +3,43 @@
 {% block title %}Purchasing Requests{% endblock %}
 
 {% block content %}
-  <h1>Purchase Requests</h1>
-  <ul>
-    {% for request in request_list %}
-      <li>{{ request.creator_name }} - {{ request.creator_email }}</li>
-    {% empty %}
-      <li>No requests yet.</li>
-    {% endfor %}
-  </ul>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+          <h5>Purchase Requests</h5>
+        </div>
+        <div class="card card-body">
+          <table class="table">
+            <tr>
+              <th>Requestor's Name</th>
+              <th>Requestor's Email</th>
+              <th>Request Type</th>
+              <th>Description</th>
+              <th>Reason</th>
+              <th>Estimated Cost</th>
+              <th>Estimated Delivery</th>
+              <th>Attachments</th>
+            </tr>
+
+            {% for request in request_list %}
+              <tr>
+                <td>{{ request.creator_name }}</td>
+                <td>{{ request.creator_email }}</td>
+                <td>{{ request.type }}</td>
+                <td>{{ request.description }}</td>
+                <td>{{ request.reason }}</td>
+                <td>{{ request.est_cost }}</td>
+                <td>{{ request.est_delivery }}</td>
+                <td>{{ request.attachment }}</td>
+              </tr>
+            {% endfor %}
+
+          </table>
+        </div>
+    </div>
+  </div>
+
 {% endblock content %}
