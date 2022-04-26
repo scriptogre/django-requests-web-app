@@ -62,7 +62,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
-    "django.contrib.admin",
+    # "django.contrib.admin",  # Replaced with material.admin
     "django.forms",
 ]
 THIRD_PARTY_APPS = [
@@ -73,6 +73,8 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "django_celery_beat",
     "django_fsm",
+    "material",
+    "material.admin",
 ]
 
 LOCAL_APPS = [
@@ -297,3 +299,24 @@ SOCIALACCOUNT_FORMS = {"signup": "purchase_requests.users.forms.UserSocialSignup
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+MATERIAL_ADMIN_SITE = {
+    "HEADER": "Purchasing Requests Admin Page",  # Admin site header
+    "TITLE": "Admin Page",  # Admin site title
+    "FAVICON": "/images/favicons",  # Admin site favicon (path to static should be specified)
+    "MAIN_BG_COLOR": "#708090",  # Admin site main color, css color should be specified
+    "MAIN_HOVER_COLOR": "#696969",  # Admin site main hover color, css color should be specified
+    "PROFILE_PICTURE": "/images/",  # Admin site profile picture (path to static should be specified)
+    "PROFILE_BG": "/images/admin-background.jpg",  # Admin site profile background (path to static should be specified)
+    "LOGIN_LOGO": "/images/login-logo.jpg",  # Admin site logo on login page (path to static should be specified)
+    "LOGOUT_BG": "/images/admin-background.jpg",  # Admin site background on login/logout pages
+    "SHOW_THEMES": True,  # Show default admin themes button
+    "TRAY_REVERSE": True,  # Hide object-tools and additional-submit-line by default
+    "NAVBAR_REVERSE": True,  # Hide side navbar by default
+    "SHOW_COUNTS": True,  # Show instances counts for each model
+    "APP_ICONS": {  # Set icons for applications(lowercase) {'application_name': 'material_icon_name', ...}
+        "sites": "send",
+    },
+    "MODEL_ICONS": {  # Set icons for models(lowercase) {'model_name': 'material_icon_name', ...}
+        "site": "contact_mail",
+    },
+}
