@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Purchase Requests Dashboard{% endblock %}
+
+{% block content %}
+
+  {% include 'requestform/status.html' %}
+
+  <br>
+
+  <div class="row">
+    <div class="col-md-7">
+      <h5>LAST 5 REQUESTS</h5>
+      <hr>
+      <div class="card card-body">
+        <a class="btn btn-primary  btn-sm btn-block" href="{% url 'requests:add' %}">Create Request</a>
+        <table class="table table-sm">
+          <tr>
+            {# TODO: List model fields by iterating using view context #}
+            <th>Name</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Reason</th>
+            <th>Est. Cost</th>
+            <th>Est. Delivery</th>
+            <th>Attachments</th>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <h5>USERS:</h5>
+      <hr>
+      <div class="card card-body">
+        <a class="btn btn-primary  btn-sm btn-block" href="">Create User</a>
+        <table class="table table-sm">
+          <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Display Name</th>
+            <th>E-Mail</th>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
