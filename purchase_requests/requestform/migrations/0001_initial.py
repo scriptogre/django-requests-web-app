@@ -7,24 +7,45 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Request',
+            name="Request",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('creator_name', models.CharField(max_length=150)),
-                ('creator_email', models.EmailField(max_length=254)),
-                ('type', models.CharField(choices=[('SRV', 'Service'), ('ITM', 'Item')], default='ITM', max_length=3)),
-                ('description', models.TextField(max_length=256)),
-                ('reason', models.TextField(max_length=256)),
-                ('est_cost', models.DecimalField(decimal_places=2, max_digits=6)),
-                ('est_delivery', models.DateField()),
-                ('attachment', models.FileField(upload_to='uploads/%Y/%m/%d/')),
-                ('budget_from', models.CharField(choices=[('PRJ', 'Project'), ('DEP', 'Department')], default='DEP', max_length=3)),
-                ('is_budget_approved', models.BooleanField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("creator_name", models.CharField(max_length=150)),
+                ("creator_email", models.EmailField(max_length=254)),
+                (
+                    "type",
+                    models.CharField(
+                        choices=[("SRV", "Service"), ("ITM", "Item")],
+                        default="ITM",
+                        max_length=3,
+                    ),
+                ),
+                ("description", models.TextField(max_length=256)),
+                ("reason", models.TextField(max_length=256)),
+                ("est_cost", models.DecimalField(decimal_places=2, max_digits=6)),
+                ("est_delivery", models.DateField()),
+                ("attachment", models.FileField(upload_to="uploads/%Y/%m/%d/")),
+                (
+                    "budget_from",
+                    models.CharField(
+                        choices=[("PRJ", "Project"), ("DEP", "Department")],
+                        default="DEP",
+                        max_length=3,
+                    ),
+                ),
+                ("is_budget_approved", models.BooleanField()),
             ],
         ),
     ]

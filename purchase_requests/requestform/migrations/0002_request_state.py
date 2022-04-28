@@ -7,13 +7,13 @@ import django_fsm
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('requestform', '0001_initial'),
+        ("requestform", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='request',
-            name='state',
-            field=django_fsm.FSMField(default='new', max_length=50),
+            model_name="request",
+            name="state",
+            field=django_fsm.FSMField(default="new", max_length=50),
         ),
     ]
