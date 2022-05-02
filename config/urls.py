@@ -5,10 +5,12 @@ from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
+from purchase_requests.dashboard.views import DashboardView
+
 urlpatterns = [
     path(
         "",
-        TemplateView.as_view(template_name="requestform/dashboard.html"),
+        DashboardView.as_view(),
         name="dashboard",
     ),
     path(

@@ -6,7 +6,7 @@
 
 {% block content %}
 
-  {% include 'requestform/status.html' %}
+  {% include 'dashboard/status.html' %}
 
   <br>
 
@@ -22,15 +22,20 @@
         <table class="table table-sm">
           <tr>
             {# TODO: List model fields by iterating using view context #}
+            <th></th>
             <th>Name</th>
-            <th>Email</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Reason</th>
             <th>Est. Cost</th>
             <th>Est. Delivery</th>
-            <th>Attachments</th>
           </tr>
+
+          {% for request in latest_requests %}
+            <tr>
+              <td><a href="{% url 'requestform:detail' request.id %}">View</a></td>
+              <td>{{ request.creator_name }}</td>
+              <td>{{ request.est_cost }}</td>
+              <td>{{ request.est_delivery }}</td>
+            </tr>
+            {% endfor %}
 
         </table>
       </div>
