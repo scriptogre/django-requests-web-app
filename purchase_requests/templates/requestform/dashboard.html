@@ -15,7 +15,10 @@
       <h5>LAST 5 REQUESTS</h5>
       <hr>
       <div class="card card-body">
-        <a class="btn btn-primary  btn-sm btn-block" href="{% url 'requests:add' %}">Create Request</a>
+        <div class="btn-group btn-group-justified">
+          <a class="btn btn-primary btn-lg" href="{% url 'requests:add' %}">Create Request</a>
+          <a class="btn btn-secondary btn-lg" href="{% url 'requests:list' %}">See all Requests</a>
+        </div>
         <table class="table table-sm">
           <tr>
             {# TODO: List model fields by iterating using view context #}
@@ -36,7 +39,7 @@
       <h5>USERS:</h5>
       <hr>
       <div class="card card-body">
-        <a class="btn btn-primary  btn-sm btn-block" href="">Create User</a>
+        <a class="btn btn-primary  btn-lg btn-block" href="">Create User</a>
         <table class="table table-sm">
           <tr>
             <th></th>
