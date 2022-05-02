@@ -14,6 +14,7 @@
         <div class="card card-body">
           <table class="table">
             <tr>
+              <th></th>
               <th>Requestor's Name</th>
               <th>Requestor's Email</th>
               <th>Request Type</th>
@@ -24,8 +25,9 @@
               <th>Attachments</th>
             </tr>
 
-            {% for request in request_list %}
+            {% for request in requests %}
               <tr>
+                <td><a href="{% url 'requestform:detail' request.id %}">View</a></td>
                 <td>{{ request.creator_name }}</td>
                 <td>{{ request.creator_email }}</td>
                 <td>{{ request.type }}</td>
