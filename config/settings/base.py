@@ -80,6 +80,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "purchase_requests.users",
     "purchase_requests.requestform",
+    "purchase_requests.dashboard"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
