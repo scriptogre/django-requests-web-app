@@ -181,9 +181,13 @@
           </div>
         {% endfor %}
       {% endif %}
-      {% block content %}
+      <main style="margin-top: 58px">
+        <div class="container pt-4">
+          {% block content %}
 
-      {% endblock content %}
+          {% endblock content %}
+        </div>
+      </main>
     </div> <!-- /container -->
     {% block modal %}{% endblock modal %}
 
