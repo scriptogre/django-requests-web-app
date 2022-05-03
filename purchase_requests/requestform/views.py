@@ -46,4 +46,4 @@ class RequestUpdateView(UpdateView):
 
 class RequestDeleteView(DeleteView):
     model = Request
-    success_url = reverse_lazy("list")
+    success_url = reverse_lazy("requestform:list")
