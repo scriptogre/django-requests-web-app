@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Purchase Requests Dashboard{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
 
@@ -21,19 +21,18 @@
         </div>
         <table class="table table-sm">
           <tr>
-            {# TODO: List model fields by iterating using view context #}
             <th></th>
             <th>Name</th>
             <th>Est. Cost</th>
             <th>Est. Delivery</th>
           </tr>
 
-          {% for request in latest_requests %}
+          {% for p_request in latest_requests %}
             <tr>
-              <td><a href="{% url 'requestform:detail' request.id %}">View</a></td>
-              <td>{{ request.creator_name }}</td>
-              <td>{{ request.est_cost }}</td>
-              <td>{{ request.est_delivery }}</td>
+              <td><a href="{% url 'requestform:detail' p_request.id %}">View</a></td>
+              <td>{{ p_request.creator_name }}</td>
+              <td>{{ p_request.est_cost }}</td>
+              <td>{{ p_request.est_delivery }}</td>
             </tr>
             {% endfor %}
 
