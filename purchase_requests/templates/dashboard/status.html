@@ -1,47 +1,107 @@
-{% load static %}
+{# TODO: Make cards responsive #}
+<section>
+  <div class="container">
 
-{% block css %}
-    <link rel="stylesheet" href="{% static "css/status.css" %}" type="text/css" />
-{% endblock %}
-<br>
+    <div class="row justify-content-center">
+      <div class="col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div>
+                <h1>{{ total_requests }}</h1>
+                <p class="mb-0">Total Requests</p>
+              </div>
+              <div class="align-self-center">
+                <i class="fa-solid fa-circle-dollar-to-slot fa-5x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="row">
-	<div class="col">
-		<div class="col-md">
-			<div class="card text-center text-white  mb-3" id="total-requests">
-			  	<div class="card-header">
-			  		<h5 class="card-title">Total Requests</h5>
-			  	</div>
-			  	<div class="card-body">
-			    	<h3 class="card-title">{{ total_requests }}</h3>
-			  	</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col">
-		<div class="col-md">
-			<div class="card text-center text-white  mb-3" id="pending-requests">
-			  	<div class="card-header">
-			  		<h5 class="card-title">Pending Requests</h5>
-			  	</div>
-			  	<div class="card-body">
-			    	<h3 class="card-title">0</h3>
-			  	</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col">
-		<div class="col-md">
-			<div class="card text-center text-white  mb-3" id="approved-requests">
-			  	<div class="card-header">
-			  		<h5 class="card-title">Approved Requests</h5>
-			  	</div>
-			  	<div class="card-body">
-			    	<h3 class="card-title">0</h3>
-			  	</div>
-			</div>
-		</div>
-	</div>
-</div>
+    <div class="row">
+      <div class="col-xl col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div>
+                <h3 class="text-success">{{ approved_requests }}</h3>
+                <p class="mb-0">Approved</p>
+              </div>
+              <div class="align-self-center">
+                <i class="fa-regular fa-circle-check text-success fa-3x"></i>
+              </div>
+            </div>
+            <div class="px-md-1">
+              <div class="progress mt-3 mb-1 rounded" style="height: 7px">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  style="width: {{ approved_requests_percentage }}%"
+                  aria-valuenow="{{ approved_requests_percentage }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div>
+                <h3 class="text-warning">{{ pending_requests }}</h3>
+                <p class="mb-0">Pending</p>
+              </div>
+              <div class="align-self-center">
+                <i class="fa-regular fa-circle-question text-warning fa-3x"></i>
+              </div>
+            </div>
+            <div class="px-md-1">
+              <div class="progress mt-3 mb-1 rounded" style="height: 7px">
+                <div
+                  class="progress-bar bg-warning"
+                  role="progressbar"
+                  style="width: {{ pending_requests_percentage }}%"
+                  aria-valuenow="{{ pending_requests_percentage }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div>
+                <h3 class="text-danger">{{ rejected_requests }}</h3>
+                <p class="mb-0">Rejected</p>
+              </div>
+              <div class="align-self-center">
+                <i class="fa-regular fa-circle-xmark text-danger fa-3x"></i>
+              </div>
+            </div>
+            <div class="px-md-1">
+              <div class="progress mt-3 mb-1 rounded" style="height: 7px">
+                <div
+                  class="progress-bar bg-danger"
+                  role="progressbar"
+                  style="width: {{ rejected_requests_percentage }}%"
+                  aria-valuenow="{{ rejected_requests_percentage }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
