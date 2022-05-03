@@ -1,70 +1,29 @@
 from django.db import models
 from django.urls import reverse
-
-# from django_fsm import FSMField, transition
+from model_utils import Choices
+from model_utils.fields import StatusField
 
 
 class Request(models.Model):
-    REQUEST_TYPE_CHOICES = [("SRV", "Service"), ("ITM", "Item")]
-    BUDGET_CHOICES = [("PRJ", "Project"), ("DEP", "Department")]
+
+    STATUS = Choices("APPROVED", "PENDING", "REJECTED")
+    BUDGET_CHOICES = Choices("Project", "Department")
+    TYPE_CHOICES = Choices("Item", "Service")
 
     creator_name = models.CharField(max_length=150)
     creator_email = models.EmailField()
-    type = models.CharField(max_length=3, choices=REQUEST_TYPE_CHOICES, default="ITM")
-    description = models.TextField(max_length=256)
+    type = models.CharField(
+        max_length=7, choices=TYPE_CHOICES, default=TYPE_CHOICES.Item
+    )
+    description = models.TextField(max_length=256, blank=True, null=True)
     reason = models.TextField(max_length=256)
     est_cost = models.DecimalField(max_digits=6, decimal_places=2)
     est_delivery = models.DateField()
     attachment = models.FileField(upload_to="uploads/%Y/%m/%d/", blank=True, null=True)
-    budget_from = models.CharField(max_length=3, choices=BUDGET_CHOICES, default="DEP")
+    budget = models.CharField(
+        max_length=10, choices=BUDGET_CHOICES, blank=True, null=True
+    )
+    status = StatusField(choices=STATUS, default=STATUS.PENDING, db_index=True)
 
     def get_absolute_url(self):
         return reverse("requests:detail", kwargs={"pk": self.pk})
-
-    # TODO: Implement django-fsm
-    # state = FSMField(default="new")
-
-    # @transition(field=state, source="new", target="pending_dept_approval")
-    # def choose_department_budget(self):
-    #     Notify Line Manager
-    # pass
-    #
-    # @transition(field=state, source="new", target="pending_pm_approval")
-    # def choose_project_budget(self):
-    #     # Notify PM
-    #     pass
-    #
-    # @transition(
-    #     field=state, source="pending_dept_approval", target="pending_ceo_approval"
-    # )
-    # def approve_department_budget(self):
-    #     # Notify RAM
-    #     # Notify CEO
-    #     pass
-    #
-    # @transition(
-    #     field=state, source="pending_pm_approval", target="pending_ceo_approval"
-    # )
-    # def approve_project_budget(self):
-    #     # Notify RAM
-    #     # Notify CEO
-    #     pass
-    #
-    # @transition(field=state, source="pending_ceo_approval", target="approved")
-    # def approve_from_ceo(self):
-    #     # Notify PR
-    #     pass
-    #
-    # @transition(
-    #     field=state,
-    #     source={"pending_dept_approval", "pending_pm_approval", "pending_ceo_approval"},
-    #     target="rejected",
-    # )
-    # def reject(self):
-    #     # Notify request creator
-    #     pass
-    #
-    # @transition(field=state, source="new", target="new")
-    # def notify_new_request(self):
-    #     # Better to fire whenever a new model is created
-    #     pass
