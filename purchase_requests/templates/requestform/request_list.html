@@ -3,58 +3,79 @@
 {% block title %}Requests List{% endblock %}
 
 {% block content %}
-  <table class="table align-middle mb-0 bg-white">
-    <thead class="bg-light">
-    <tr>
-      <th>Requestor</th>
-      <th>Type</th>
-      <th>Description & Reason</th>
-      <th>Status</th>
-      <th>Est. Cost</th>
-      <th>Est. Delivery</th>
-      <th>Attachment</th>
-      <th>Budget</th>
-      <th></th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for p_request in requests %}
-      <tr>
-        <td>
-          <div class="d-flex align-items-center">
-            <div>
-              <p class="fw-bold mb-1">{{ p_request.creator_name }}</p>
-              <p class="text-muted mb-0">{{ p_request.creator_email }}</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">{{ p_request.type }}</p>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">{{ p_request.description}}</p>
-          <p class="text-muted mb-0">{{ p_request.reason }}</p>
-        </td>
-        <td>
-            <span class="badge badge-
-                  {% if p_request.status == "APPROVED" %}success
-                  {% elif p_request.status == "REJECTED" %}danger
-                  {% else %}warning{% endif %}
-                  rounded-pill d-inline">{{ p_request.status }}</span>
-        </td>
-        <td>{{ p_request.est_cost }}</td>
-        <td>{{ p_request.est_delivery }}</td>
-        <td>{{ p_request.attachment }}</td>
-        <td>{{ p_request.budget }}</td>
-        <td>
-          <button onclick="location.href='{% url 'requestform:detail' p_request.id %}'" type="button" class="btn btn-link btn-sm btn-rounded">
-            Edit
-          </button>
-        </td>
-        <td><button onclick="location.href='{% url 'requestform:delete' p_request.id %}'" type="button" class="btn btn-danger btn-sm btn-rounded">Delete</button></td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+
+  <div class="container mb-4 col-6">
+        <p class="h1 p-0 text-center">Requests List</p>
+  </div>
+
+  <!-- DataTable -->
+  <div id="datatable-custom" class="w-100" data-mdb-selectable="true" data-mdb-multi="true"></div>
+
+  <script>
+    const customDatatable = document.getElementById('datatable-custom');
+
+    const basicData = {
+      columns: [
+        {# TODO: Make <th> of actions left and right padding smaller #}
+        { label: '', field: 'actions', sort: false},
+        { label: 'ID', field: 'id' },
+        { label: 'Name', field: 'creator_name' },
+        { label: 'Email', field: 'creator_email' },
+        { label: 'Type', field: 'type' },
+        { label: 'Description', field: 'description' },
+        { label: 'Reason', field: 'reason' },
+        { label: 'Status', field: 'status' },
+        { label: 'Est. Cost', field: 'est_cost' },
+        { label: 'Attachment', field: 'attachment', sort: false },
+        { label: 'Budget', field: 'budget' }
+      ],
+      rows: [
+        {% for p_request in requests %}
+          {
+            actions: {
+              edit_url: '{% url 'requestform:detail' p_request.id %}',
+              delete_url: '{% url 'requestform:delete' p_request.id %}'
+            },
+            id: {{ p_request.id }},
+            creator_name: '{{ p_request.creator_name }}',
+            creator_email: '{{ p_request.creator_email }}',
+            type: '{{ p_request.type }}',
+            description: '{{ p_request.description }}',
+            reason: '{{ p_request.reason }}',
+            status: {
+              approval_status: '{{ p_request.status }}',
+              badge_type: '{% if p_request.status == "APPROVED" %}success{% elif p_request.status == "REJECTED" %}danger{% else %}warning{% endif %}',
+            },
+            est_cost: '{{ p_request.est_cost }}',
+            est_delivery: '{{ p_request.est_delivery }}',
+            attachment: '{{ p_request.attachment }}',
+            budget: '{{ p_request.budget }}',
+          },
+        {% endfor %}
+      ].map((row) => {
+        return {
+          ...row,
+          actions: `
+          <div class="" id="actions">
+            <button onclick="location.href='${row.actions.edit_url}'" type="button" class="btn btn-primary btn-floating btn-sm">
+                <i class="fas fa-edit"></i>
+            </button>
+            <button onclick="location.href='${row.actions.delete_url}'" type="button" class="btn btn-danger btn-floating btn-sm">
+                <i class="fas fa-trash"></i>
+            </button>
+          </div>`,
+
+          status: `
+          <span class="badge badge-${row.status.badge_type} rounded-pill d-inline">${row.status.approval_status}</span>`,
+        };
+      }),
+    };
+
+    new mdb.Datatable(customDatatable, basicData);
+
+    customDatatable.addEventListener('selectRows.mdb.datatable', (e) => {
+      console.log(e.selectedRows, e.selectedIndexes, e.allSelected);
+    })
+  </script>
+
 {% endblock content %}
