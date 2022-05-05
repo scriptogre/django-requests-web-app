@@ -4,9 +4,82 @@
 
 {% block content %}
 
-  <form action="" method="POST"> {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-  </form>
+  <div class="container mb-4 col-6">
+        <p class="h1 p-0 text-center">New Request Form</p>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <form class="mt-lg-3">
+        <!-- Requestor's Name (Text) -->
+        <div class="form-outline mb-3">
+          <input type="text" id="nameText" class="form-control" />
+          <label class="form-label" for="nameText">Requestor's Name</label>
+        </div>
+
+        <!-- Requestor's Email (Text) -->
+        <div class="form-outline mb-3">
+          <input type="email" id="emailText" class="form-control" />
+          <label class="form-label" for="emailText">Requestor's Email</label>
+        </div>
+
+        <!-- Request Type (Radio) -->
+        <div class="btn-group mb-3 w-100">
+          <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked />
+          <label class="btn btn-primary" for="option1">Item</label>
+
+          <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" />
+          <label class="btn btn-primary" for="option2">Service</label>
+        </div>
+
+        <!-- Description (Textarea) -->
+        <div class="form-outline mb-3">
+          <textarea class="form-control" id="descriptionText" rows="4"></textarea>
+          <label class="form-label" for="descriptionText">Description</label>
+        </div>
+
+        <!-- Reason (Text) -->
+        <div class="form-outline mb-3">
+          <input type="text" id="reasonText" class="form-control" />
+          <label class="form-label" for="reasonText">Reason</label>
+        </div>
+
+        <!-- Estimated Cost -->
+        <div class="input-group p-0 mb-3">
+          <span class="input-group-text">€</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Estimated Cost"
+            aria-label="Estimated Cost"
+          />
+          <span class="input-group-text">.00</span>
+        </div>
+
+        <!-- Estimated Delivery -->
+        <div class="form-outline datepicker mb-3" data-mdb-toggle-button="false">
+          <input type="text" class="form-control" id="exampleDatepicker13" data-mdb-toggle="datepicker" />
+          <label for="exampleDatepicker13" class="form-label">Select a date</label>
+        </div>
+
+        <!-- Attachment -->
+        <div class="form-outline mb-3">
+          <input class="form-control form-control-lg" id="formFileLg" type="file" />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="button" class="btn btn-primary w-100">Submit</button>
+
+        <!-- Required Form Initialization -->
+        <script>
+          document.querySelectorAll('.form-outline').forEach((formOutline) => {
+            new mdb.Input(formOutline).init();
+          });
+        </script>
+
+      </form>
+    </div>
+  </div>
+
 
 {% endblock %}
