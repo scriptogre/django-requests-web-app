@@ -2,7 +2,7 @@
 {# TODO: Implement material design confirm delete page #}
 {% block content %}
 <form action="" method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <p>Are you sure you want to delete request {{  object.creator_name }}'s request #{{ object.id }}?</p>
     <input type="submit" value="Confirm" />
 </form>
 {% endblock %}
