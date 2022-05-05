@@ -18,7 +18,7 @@
 
     <!-- Font Awesome -->
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
       rel="stylesheet"
     />
     <!-- Google Fonts -->
@@ -27,10 +27,8 @@
       rel="stylesheet"
     />
     <!-- MDB -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
+
 
     <!-- This file stores project-specific CSS -->
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
@@ -44,9 +42,7 @@
     <!-- Your stuff: Third-party javascript libraries go here -->
 
     <!-- MDB -->
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
 
     <!-- place project specific Javascript in this file -->
     <script defer src="{% static 'js/project.js' %}"></script>
