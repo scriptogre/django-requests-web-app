@@ -59,6 +59,8 @@
   >
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
+
+        <!-- Main dashboard -->
         <a
           href="{% url 'dashboard' %}"
           class="list-group-item list-group-item-action py-4"
@@ -67,6 +69,15 @@
           <i class="fa-solid fa-chart-line fa-fw me-3 fa-lg"></i></i
           ><span>Main dashboard</span>
         </a>
+
+        <!-- Create a Request -->
+        <a
+          href="{% url 'requestform:add' %}"
+          class="list-group-item list-group-item-action py-4">
+          <i class="fa-solid fa-circle-dollar-to-slot fa-fw me-3 fa-lg"></i><span>New Request</span>
+        </a>
+
+        <!-- Requests -->
         {# TODO: Make notification badge dynamic #}
         <a
           href="{% url 'requestform:list' %}"
