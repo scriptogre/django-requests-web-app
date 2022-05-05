@@ -16,10 +16,7 @@
       <p class="h2 mb-3 text-center">Latest requests</p>
       <hr>
       <div class="card card-body">
-        <div class="btn-group btn-group-justified">
-          <a class="btn btn-primary btn-lg" href="{% url 'requests:add' %}">Create Request</a>
-          <a class="btn btn-secondary btn-lg" href="{% url 'requests:list' %}">See all Requests</a>
-        </div>
+        <a class="btn btn-primary btn-lg mb-3" href="{% url 'requests:add' %}">Create Request</a>
         <table class="table table-sm">
           <tr>
             <th></th>
