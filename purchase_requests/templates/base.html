@@ -61,23 +61,24 @@
       <div class="list-group list-group-flush mx-3 mt-4">
         <a
           href="{% url 'dashboard' %}"
-          class="list-group-item list-group-item-action py-2 ripple"
+          class="list-group-item list-group-item-action py-4"
           aria-current="true"
         >
-          <i class="fas fa-tachometer-alt fa-fw me-3"></i
+          <i class="fa-solid fa-chart-line fa-fw me-3 fa-lg"></i></i
           ><span>Main dashboard</span>
         </a>
         {# TODO: Make notification badge dynamic #}
         <a
           href="{% url 'requestform:list' %}"
-          class="list-group-item list-group-item-action py-2 ripple"
-        ><span class="badge rounded-pill badge-notification bg-danger">1</span><i class="fas fa-chart-bar fa-fw me-3"></i><span>Requests</span>
-        </a
-        >
+          class="list-group-item list-group-item-action py-4"
+        ><span class="badge rounded-pill badge-notification bg-danger">1</span><i class="fa-solid fa-sack-dollar fa-fw me-3 fa-lg"></i><span>Requests</span>
+        </a>
+
+        <!-- Users -->
         <a
           href="#"
-          class="list-group-item list-group-item-action py-2 ripple"
-        ><i class="fas fa-users fa-fw me-3"></i><span>Users</span></a
+          class="list-group-item list-group-item-action py-4"
+        ><i class="fas fa-users fa-fw me-3 fa-lg"></i><span>Users</span></a
         >
       </div>
     </div>
