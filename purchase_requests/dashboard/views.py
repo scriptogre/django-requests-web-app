@@ -1,31 +1,39 @@
-from django.views.generic import TemplateView
+from django.contrib.auth import get_user_model
+from django.views.generic import ListView
 
 from purchase_requests.requestform.models import Request
 
 
-class DashboardView(TemplateView):
+class DashboardView(ListView):
+    model = Request
     template_name = "dashboard/dashboard.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["latest_requests"] = Request.objects.order_by("-id")[:5:-1]
-        context["total_requests"] = Request.objects.count()
-        context["pending_requests"] = Request.objects.filter(
-            status=Request.STATUS.PENDING
-        ).count()
-        context["pending_requests_percentage"] = int(
-            context["pending_requests"] * 100 / context["total_requests"]
-        )
-        context["approved_requests"] = Request.objects.filter(
-            status=Request.STATUS.APPROVED
-        ).count()
-        context["approved_requests_percentage"] = int(
-            (context["approved_requests"] * 100) / context["total_requests"]
-        )
-        context["rejected_requests"] = Request.objects.filter(
-            status=Request.STATUS.REJECTED
-        ).count()
-        context["rejected_requests_percentage"] = int(
-            (context["rejected_requests"] * 100) / context["total_requests"]
-        )
-        return context
+    extra_context = {
+        "total_count": Request.objects.all().count(),
+        "approved_count": Request.objects.approved().count(),
+        "pending_count": Request.objects.pending().count(),
+        "rejected_count": Request.objects.rejected().count(),
+        "latest_requests": Request.objects.order_by("-id")[:5:-1],
+        "users": get_user_model().objects.all(),
+        "verbose_fields": {
+            field.name: field.verbose_name.title() for field in Request._meta.fields
+        },
+    }
+    extra_context.update(
+        {
+            "approved_percentage": Request.objects.approved().count()
+            * 100
+            / Request.objects.all().count()
+            if Request.objects.all().count()
+            else 0,
+            "pending_percentage": Request.objects.pending().count()
+            * 100
+            / Request.objects.all().count()
+            if Request.objects.all().count()
+            else 0,
+            "rejected_percentage": Request.objects.rejected().count()
+            * 100
+            / Request.objects.all().count()
+            if Request.objects.all().count()
+            else 0,
+        }
+    )
