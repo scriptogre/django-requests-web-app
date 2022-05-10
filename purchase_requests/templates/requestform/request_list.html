@@ -5,32 +5,32 @@
 {% block content %}
 
   <div class="container mb-4 col-6">
-        <p class="h1 p-0 text-center">Requests List</p>
+    <p class="h1 p-0 text-center">Requests List</p>
   </div>
 
   <!-- DataTable -->
-  <div id="datatable-custom" class="w-100" data-mdb-selectable="true" data-mdb-multi="true"></div>
+  <div id="datatable-custom" class="datatable-hover w-100" data-mdb-selectable="true" data-mdb-multi="true"></div>
+
 
   <script>
     const customDatatable = document.getElementById('datatable-custom');
 
-    const basicData = {
+    const allRequests = {
       columns: [
-        {# TODO: Make <th> of actions left and right padding smaller #}
-        { label: '', field: 'actions', sort: false},
-        { label: 'ID', field: 'id' },
-        { label: 'Name', field: 'creator_name' },
-        { label: 'Email', field: 'creator_email' },
-        { label: 'Type', field: 'type' },
-        { label: 'Description', field: 'description' },
-        { label: 'Reason', field: 'reason' },
-        { label: 'Status', field: 'status' },
-        { label: 'Est. Cost', field: 'est_cost' },
-        { label: 'Attachment', field: 'attachment', sort: false },
-        { label: 'Budget', field: 'budget' }
+        {label: '', field: 'actions', sort: false},
+        {label: '{{ verbose_fields.id }}', field: 'id'},
+        {label: '{{ verbose_fields.creator_name }}', field: 'creator_name'},
+        {label: '{{ verbose_fields.creator_email }}', field: 'creator_email'},
+        {label: '{{ verbose_fields.type }}', field: 'type'},
+        {label: '{{ verbose_fields.description }}', field: 'description'},
+        {label: '{{ verbose_fields.reason }}', field: 'reason'},
+        {label: '{{ verbose_fields.status }}', field: 'status'},
+        {label: '{{ verbose_fields.est_cost }}', field: 'est_cost'},
+        {label: '{{ verbose_fields.attachment }}', field: 'attachment', sort: false},
+        {label: '{{ verbose_fields.budget }}', field: 'budget'}
       ],
       rows: [
-        {% for p_request in requests %}
+        {% for p_request in request_list %}
           {
             actions: {
               edit_url: '{% url 'requestform:detail' p_request.id %}',
@@ -44,9 +44,11 @@
             reason: '{{ p_request.reason }}',
             status: {
               approval_status: '{{ p_request.status }}',
-              badge_type: '{% if p_request.status == "APPROVED" %}success{% elif p_request.status == "REJECTED" %}danger{% else %}warning{% endif %}',
+              badge_type: {% if p_request.status == "APPROVED" %}'success'
+                {% elif p_request.status == "REJECTED" %}'danger'
+                {% else %}'warning'{% endif %},
             },
-            est_cost: '{{ p_request.est_cost }}',
+            est_cost: '€ {{ p_request.est_cost }}',
             est_delivery: '{{ p_request.est_delivery }}',
             attachment: '{{ p_request.attachment }}',
             budget: '{{ p_request.budget }}',
@@ -70,8 +72,7 @@
         };
       }),
     };
-
-    new mdb.Datatable(customDatatable, basicData);
+    new mdb.Datatable(customDatatable, allRequests);
 
     customDatatable.addEventListener('selectRows.mdb.datatable', (e) => {
       console.log(e.selectedRows, e.selectedIndexes, e.allSelected);
