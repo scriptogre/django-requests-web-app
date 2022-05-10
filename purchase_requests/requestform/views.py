@@ -6,9 +6,14 @@ from django.views.generic.list import ListView
 from .models import Request
 
 
-class RequestsListView(ListView):
+class RequestListView(ListView):
     model = Request
-    context_object_name = "requests"
+    template_name = "requestform/request_list.html"
+    extra_context = {
+        "verbose_fields": {
+            field.name: field.verbose_name.title() for field in Request._meta.fields
+        }
+    }
 
 
 class RequestCreateView(CreateView):
