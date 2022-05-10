@@ -9,57 +9,24 @@
     <p class="h1 p-0 text-center">Dashboard</p>
   </div>
 
-  {% include 'dashboard/status.html' %}
+  {% include 'dashboard/status_widget.html' %}
 
-  <div class="row mt-4">
-    <div class="col-md-7">
+  <div class="row">
+    <!-- LATEST REQUESTS SECTION -->
+    <div class="col-xl-7 mb-4">
       <p class="h2 mb-3 text-center">Latest requests</p>
       <hr>
       <div class="card card-body">
         <a class="btn btn-primary btn-lg mb-3" href="{% url 'requests:add' %}">Create Request</a>
-        <table class="table table-sm">
-          <tr>
-            <th>Name</th>
-            <th>Est. Cost</th>
-            <th>Est. Delivery</th>
-            <th></th>
-          </tr>
-
-          {% for p_request in latest_requests %}
-            <tr>
-              <td>{{ p_request.creator_name }}</td>
-              <td>€ {{ p_request.est_cost }}</td>
-              <td>{{ p_request.est_delivery }}</td>
-              <td>
-                <div class="" id="actions">
-                  <button onclick="location.href='{% url 'requestform:detail' p_request.id %}'" type="button" class="btn btn-primary btn-floating btn-sm">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <button onclick="location.href='{% url 'requestform:delete' p_request.id %}'" type="button" class="btn btn-danger btn-floating btn-sm">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          {% endfor %}
-
-        </table>
+        {% include 'dashboard/latest_requests_widget.html' %}
       </div>
     </div>
-    <div class="col-md-5">
+    <!-- USERS SECTION -->
+    <div class="col-xl-5 mb-4">
       <p class="h2 mb-3 text-center">Users</p>
       <hr>
       <div class="card card-body">
-        <a class="btn btn-primary btn-lg btn-block mb-3" href="">Create User</a>
-        <table class="table table-sm">
-          <tr>
-            <th></th>
-            <th>Id</th>
-            <th>Display Name</th>
-            <th>E-Mail</th>
-          </tr>
-
-        </table>
+        {% include 'dashboard/users_widget.html' %}
       </div>
     </div>
   </div>

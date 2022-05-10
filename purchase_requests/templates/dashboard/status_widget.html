@@ -1,4 +1,4 @@
-<section>
+<section class="mb-4">
   <div class="container">
 
     <div class="row justify-content-center">
@@ -7,7 +7,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between px-md-1">
               <div>
-                <h1>{{ total_requests }}</h1>
+                <h1>{{ total_count }}</h1>
                 <p class="mb-0">Total Requests</p>
               </div>
               <div class="align-self-center">
@@ -25,7 +25,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between px-md-1">
               <div>
-                <h3 class="text-success">{{ approved_requests }}</h3>
+                <h3 class="text-success">{{ approved_count }}</h3>
                 <p class="mb-0">Approved</p>
               </div>
               <div class="align-self-center">
@@ -37,8 +37,8 @@
                 <div
                   class="progress-bar bg-success"
                   role="progressbar"
-                  style="width: {{ approved_requests_percentage }}%"
-                  aria-valuenow="{{ approved_requests_percentage }}"
+                  style="width: {{ approved_percentage }}%"
+                  aria-valuenow="{{ approved_percentage }}"
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
@@ -52,7 +52,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between px-md-1">
               <div>
-                <h3 class="text-warning">{{ pending_requests }}</h3>
+                <h3 class="text-warning">{{ pending_count }}</h3>
                 <p class="mb-0">Pending</p>
               </div>
               <div class="align-self-center">
@@ -79,7 +79,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between px-md-1">
               <div>
-                <h3 class="text-danger">{{ rejected_requests }}</h3>
+                <h3 class="text-danger">{{ rejected_count }}</h3>
                 <p class="mb-0">Rejected</p>
               </div>
               <div class="align-self-center">
@@ -91,8 +91,8 @@
                 <div
                   class="progress-bar bg-danger"
                   role="progressbar"
-                  style="width: {{ rejected_requests_percentage }}%"
-                  aria-valuenow="{{ rejected_requests_percentage }}"
+                  style="width: {{ rejected_percentage }}%"
+                  aria-valuenow="{{ rejected_percentage }}"
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
