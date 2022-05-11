@@ -75,6 +75,7 @@ THIRD_PARTY_APPS = [
     "django_fsm",
     "material",
     "material.admin",
+    "floppyforms",
 ]
 
 LOCAL_APPS = [
