@@ -1,8 +1,13 @@
-{% extends 'base.html' %}
-{# TODO: Implement material design confirm delete page #}
-{% block content %}
-<form action="" method="post">{% csrf_token %}
-    <p>Are you sure you want to delete request {{  object.creator_name }}'s request #{{ object.id }}?</p>
-    <input type="submit" value="Confirm" />
+<form action="{% url 'requestform:delete' object.id %}" method="post">
+  {% csrf_token %}
+  <div class="modal-header">
+    <h5 class="modal-title">Delete Request</h5>
+    <button type="button" class="close" data-bs-dismiss="modal" aria-label=Close><span aria-hidden="true">×</span></button>
+  </div>
+  <div class="modal-body">
+    <p class="delete-text">Are you sure you want to delete request with ID <strong>{{ object.id }}</strong>?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" id="delete-btn" class="btn btn-danger">Delete</button>
+  </div>
 </form>
-{% endblock %}
