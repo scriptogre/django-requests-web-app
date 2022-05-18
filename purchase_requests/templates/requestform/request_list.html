@@ -8,10 +8,36 @@
     <p class="h1 p-0 text-center">Requests List</p>
   </div>
 
+  <button id="create-request" type="button" class="btn btn-primary">Add Request</button>
+
   <!-- DataTable -->
   <div id="datatable-custom" class="datatable-hover w-100" data-mdb-selectable="true" data-mdb-multi="true"></div>
 
+{% endblock content %}
 
+{% block modal %}
+  <!-- Placeholder for the modal -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content"></div>
+    </div>
+  </div>
+
+
+  <!-- Empty toast to show the message -->
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div id="toast-body" class="toast-body"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block inline_javascript %}
+
+  {# Initializes DataTable#}
   <script>
     const customDatatable = document.getElementById('datatable-custom');
 
@@ -33,7 +59,7 @@
         {% for p_request in request_list %}
           {
             actions: {
-              edit_url: '{% url 'requestform:detail' p_request.id %}',
+              edit_url: '{% url 'requestform:update' p_request.id %}',
               delete_url: '{% url 'requestform:delete' p_request.id %}'
             },
             id: {{ p_request.id }},
@@ -59,10 +85,10 @@
           ...row,
           actions: `
           <div class="" id="actions">
-            <button onclick="location.href='${row.actions.edit_url}'" type="button" class="btn btn-primary btn-floating btn-sm">
+            <button type="button" class="btn btn-primary btn-floating btn-sm update-request" data-form-url='${row.actions.edit_url}'>
                 <i class="fas fa-edit"></i>
             </button>
-            <button onclick="location.href='${row.actions.delete_url}'" type="button" class="btn btn-danger btn-floating btn-sm">
+            <button type="button" class="btn btn-danger btn-floating btn-sm delete-request" data-form-url='${row.actions.delete_url}'>
                 <i class="fas fa-trash"></i>
             </button>
           </div>`,
@@ -79,4 +105,34 @@
     })
   </script>
 
-{% endblock content %}
+  {# Initializes modal form #}
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      $("#create-request").modalForm({
+        formURL: "{% url 'requestform:add' %}",
+        errorClass: ".is-invalid",
+      });
+
+      function updateRequestModalForm() {
+          $(".update-request").each(function () {
+            $(this).modalForm({
+              formURL: $(this).data("form-url"),
+            });
+          });
+        }
+      updateRequestModalForm();
+
+      function deleteRequestModalForm() {
+          $(".delete-request").each(function () {
+            $(this).modalForm({
+              formURL: $(this).data("form-url"),
+              isDeleteForm: true
+            });
+          });
+        }
+      deleteRequestModalForm();
+
+    });
+  </script>
+{% endblock %}
