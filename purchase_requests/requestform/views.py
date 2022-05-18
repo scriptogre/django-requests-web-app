@@ -1,8 +1,13 @@
+from bootstrap_modal_forms.generic import (
+    BSModalCreateView,
+    BSModalDeleteView,
+    BSModalUpdateView,
+)
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
+from .forms import CreateRequestForm, UpdateRequestForm
 from .models import Request
 
 
@@ -12,22 +17,22 @@ class RequestListView(ListView):
     extra_context = {
         "verbose_fields": {
             field.name: field.verbose_name.title() for field in Request._meta.fields
-        }
+        },
     }
 
 
-class RequestCreateView(CreateView):
+class RequestCreateView(BSModalCreateView):
     model = Request
-    fields = [
-        "creator_name",
-        "creator_email",
-        "type",
-        "description",
-        "reason",
-        "est_cost",
-        "est_delivery",
-        "attachment",
-    ]
+    form_class = CreateRequestForm
+    success_message = "Success: Request was created."
+    success_url = reverse_lazy("requests:list")
+
+
+class RequestUpdateView(BSModalUpdateView):
+    model = Request
+    form_class = UpdateRequestForm
+    success_message = "Success: Request was updated."
+    success_url = reverse_lazy("requests:list")
 
 
 class RequestDetailView(DetailView):
@@ -35,20 +40,7 @@ class RequestDetailView(DetailView):
     context_object_name = "request"
 
 
-class RequestUpdateView(UpdateView):
+class RequestDeleteView(BSModalDeleteView):
     model = Request
-    fields = [
-        "creator_name",
-        "creator_email",
-        "type",
-        "description",
-        "reason",
-        "est_cost",
-        "est_delivery",
-        "attachment",
-    ]
-
-
-class RequestDeleteView(DeleteView):
-    model = Request
+    success_message = "Success: Request was deleted."
     success_url = reverse_lazy("requestform:list")
