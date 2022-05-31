@@ -3,13 +3,14 @@
 {% block title %}Requests List{% endblock %}
 
 {% block content %}
-
-  <div class="container mb-4 col-6">
-    <p class="h1 p-0 text-center">Requests List</p>
+  <div class="container">
+    <p class="h1 mb-4 text-center">Requests List</p>
   </div>
-
-  <button id="create-request" type="button" class="btn btn-primary">Add Request</button>
-
+  <div class="row align-items-center mb-4">
+    <div class="col">
+      <button id="create-request" type="button" class="btn btn-primary">Add Request</button>
+    </div>
+  </div>
   <!-- DataTable -->
   <div id="datatable-custom" class="datatable-hover w-100" data-mdb-selectable="true" data-mdb-multi="true"></div>
 
@@ -84,7 +85,7 @@
         return {
           ...row,
           actions: `
-          <div class="" id="actions">
+          <div id="actions">
             <button type="button" class="btn btn-primary btn-floating btn-sm update-request" data-form-url='${row.actions.edit_url}'>
                 <i class="fas fa-edit"></i>
             </button>
