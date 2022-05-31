@@ -16,7 +16,7 @@
       {% for p_request in request_list %}
         {
           actions       : {
-                          edit_url: '{% url 'requestform:detail' p_request.id %}',
+                          edit_url: '{% url 'requestform:update' p_request.id %}',
                           delete_url: '{% url 'requestform:delete' p_request.id %}'
                           },
           status        : {
@@ -36,10 +36,10 @@
         ...row,
         actions: `
           <div class="" id="actions">
-            <button onclick="location.href='${row.actions.edit_url}'" type="button" class="btn btn-primary btn-floating btn-sm">
+            <button type="button" class="btn btn-primary btn-floating btn-sm update-request" data-form-url='${row.actions.edit_url}'>
                 <i class="fas fa-edit"></i>
             </button>
-            <button onclick="location.href='${row.actions.delete_url}'" type="button" class="btn btn-danger btn-floating btn-sm">
+            <button type="button" class="btn btn-danger btn-floating btn-sm delete-request" data-form-url='${row.actions.delete_url}'>
                 <i class="fas fa-trash"></i>
             </button>
           </div>`,
