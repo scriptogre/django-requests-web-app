@@ -9,6 +9,7 @@ License: MIT
 
 ## Screenshots
 [![Dashboard.png](https://i.postimg.cc/X7YCJcPq/Dashboard.png)](https://postimg.cc/14bt76s1)
+[![admin-login.png](https://i.postimg.cc/JnRhFRV0/admin-login.png)](https://postimg.cc/hJ3gzWGR)
 ## Settings
 
 Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
