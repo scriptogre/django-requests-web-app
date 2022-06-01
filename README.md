@@ -22,15 +22,15 @@ License: MIT
 
 ### Without Docker
 
-1. Clone
+1. Clone repository
 ```
-gh repo clone scriptogre/django-requests-web-app
+git clone https://github.com/scriptogre/django-requests-web-app.git
 ```
-2. Using terminal, cd to project directory
+2. Cd to project directory
 ```
 cd "<path>/django-requests-web-app"
 ```
-3. Create a virtual env & activate
+3. Create a virtual env & activate it
 ```
 conda create --name <env_name>
 ```
@@ -40,12 +40,12 @@ conda activate <env_name>
 Note: In PowerShell, Conda environment activation won't work unless you run
 ```
 conda init powershell
-```
-    
-4. Inside the project folder, with <env_name> activated
+``` 
+4. Install requirements (inside root project directory)
 ```
 pip install -r requirements/local.txt
 ```
+5.
 
 ## Settings
 
