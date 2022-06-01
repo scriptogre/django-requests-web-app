@@ -16,9 +16,9 @@ License: MIT
 ## Getting up and running locally
 
 ### Requirements (if running w/o Docker)
--       [Python 3.9+](https://www.python.org/downloads/windows/)
--       [PostgreSQL](https://www.postgresql.org/download/)
--       [Anaconda](https://www.anaconda.com/products/distribution)
+-[Python 3.9+](https://www.python.org/downloads/windows/)
+-[PostgreSQL](https://www.postgresql.org/download/)
+-[Anaconda](https://www.anaconda.com/products/distribution)
 
 ## Settings
 
