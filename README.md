@@ -37,6 +37,12 @@ conda create --name <env_name>
 ```
 conda activate <env_name>
 ```
+[^note]:
+    Note: In PowerShell, Conda environment activation won't work unless you run
+    ```
+    conda init powershell
+    ```
+    
 4. Inside the project folder, with <env_name> activated
 ```
 pip install -r requirements/local.txt
