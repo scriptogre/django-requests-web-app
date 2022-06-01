@@ -19,6 +19,11 @@ License: MIT
 - [Python 3.9+](https://www.python.org/downloads/windows/)
 - [PostgreSQL](https://www.postgresql.org/download/)
 - [Anaconda](https://www.anaconda.com/products/distribution)
+- 
+### Without Docker
+
+- Clone repo
+``gh repo clone scriptogre/django-requests-web-app``
 
 ## Settings
 
