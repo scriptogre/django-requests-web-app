@@ -13,6 +13,12 @@ License: MIT
 [![Requests-list.png](https://i.postimg.cc/CK91s9Sr/Requests-list.png)](https://postimg.cc/qtX4kbt2)
 [![admin-login.png](https://i.postimg.cc/xTVm2Nrp/admin-login.png)](https://postimg.cc/dDn3R1VG)
 
+## Getting up and running locally
+
+### Requirements (if running w/o Docker)
+[Python 3.9+](https://www.python.org/downloads/windows/)
+[PostgreSQL](https://www.postgresql.org/download/)
+[Anaconda](https://www.anaconda.com/products/distribution)
 
 ## Settings
 
