@@ -37,10 +37,10 @@ conda create --name <env_name>
 ```
 conda activate <env_name>
 ```
-    Note: In PowerShell, Conda environment activation won't work unless you run
-    ```
-    conda init powershell
-    ```
+Note: In PowerShell, Conda environment activation won't work unless you run
+```
+conda init powershell
+```
     
 4. Inside the project folder, with <env_name> activated
 ```
