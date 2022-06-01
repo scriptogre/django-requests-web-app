@@ -8,7 +8,7 @@ Simple web application for automating purchase requests by sending mails for req
 License: MIT
 
 ## Screenshots
-[![Dashboard.png](https://i.postimg.cc/X7YCJcPq/Dashboard.png)](https://postimg.cc/14bt76s1)
+[![Dashboard.png](https://i.postimg.cc/rF49GLT3/Dashboard.png)](https://postimg.cc/1f96P2fr)
 [![admin-login.png](https://i.postimg.cc/JnRhFRV0/admin-login.png)](https://postimg.cc/hJ3gzWGR)
 ## Settings
 
