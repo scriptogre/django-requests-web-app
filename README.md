@@ -22,9 +22,24 @@ License: MIT
 
 ### Without Docker
 
-- Clone repo
+1. Clone
 ```
 gh repo clone scriptogre/django-requests-web-app
+```
+2. Using terminal, cd to project directory
+```
+cd "<path>/django-requests-web-app"
+```
+3. Create a virtual env & activate
+```
+conda create --name <env_name>
+```
+```
+conda activate <env_name>
+```
+4. Inside the project folder, with <env_name> activated
+```
+pip install -r requirements/local.txt
 ```
 
 ## Settings
