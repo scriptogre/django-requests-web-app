@@ -13,14 +13,10 @@ License: MIT
 [![Requests-list.png](https://i.postimg.cc/CK91s9Sr/Requests-list.png)](https://postimg.cc/qtX4kbt2)
 [![admin-login.png](https://i.postimg.cc/xTVm2Nrp/admin-login.png)](https://postimg.cc/dDn3R1VG)
 
+### Requirements
+- [Docker](https://www.docker.com/products/docker-desktop/)
+
 ## Getting up and running locally
-
-### Requirements (if running w/o Docker)
-- [Python 3.9+](https://www.python.org/downloads/windows/)
-- [PostgreSQL](https://www.postgresql.org/download/)
-- [Anaconda](https://www.anaconda.com/products/distribution)
-
-### Without Docker
 
 1. Clone repository
 ```
@@ -30,22 +26,11 @@ git clone https://github.com/scriptogre/django-requests-web-app.git
 ```
 cd "<path>/django-requests-web-app"
 ```
-3. Create a virtual env & activate it
+3. Inside root project dir, create a folder called ".env"
+4. Build Docker image (might take a minute)
 ```
-conda create --name <env_name>
+docker-compose -f local.yml build
 ```
-```
-conda activate <env_name>
-```
-Note: In PowerShell, Conda environment activation won't work unless you run
-```
-conda init powershell
-``` 
-4. Install requirements (inside root project directory)
-```
-pip install -r requirements/local.txt
-```
-5.
 
 ## Settings
 
