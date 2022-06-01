@@ -9,7 +9,10 @@ License: MIT
 
 ## Screenshots
 [![Dashboard.png](https://i.postimg.cc/rF49GLT3/Dashboard.png)](https://postimg.cc/1f96P2fr)
+[![Update-modal.png](https://i.postimg.cc/yxmkdnqQ/Update-modal.png)](https://postimg.cc/Wq42YG1g)
+[![Requests-list.png](https://i.postimg.cc/CK91s9Sr/Requests-list.png)](https://postimg.cc/qtX4kbt2)
 [![admin-login.png](https://i.postimg.cc/xTVm2Nrp/admin-login.png)](https://postimg.cc/dDn3R1VG)
+
 
 ## Settings
 
