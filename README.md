@@ -37,7 +37,6 @@ conda create --name <env_name>
 ```
 conda activate <env_name>
 ```
-[^note]:
     Note: In PowerShell, Conda environment activation won't work unless you run
     ```
     conda init powershell
