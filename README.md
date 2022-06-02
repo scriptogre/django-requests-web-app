@@ -7,6 +7,31 @@ Simple web application for automating purchase requests by sending mails for req
 
 License: MIT
 
+## Screenshots
+[![Dashboard.png](https://i.postimg.cc/rF49GLT3/Dashboard.png)](https://postimg.cc/1f96P2fr)
+[![Update-modal.png](https://i.postimg.cc/yxmkdnqQ/Update-modal.png)](https://postimg.cc/Wq42YG1g)
+[![Requests-list.png](https://i.postimg.cc/CK91s9Sr/Requests-list.png)](https://postimg.cc/qtX4kbt2)
+[![admin-login.png](https://i.postimg.cc/xTVm2Nrp/admin-login.png)](https://postimg.cc/dDn3R1VG)
+
+### Requirements
+- [Docker](https://www.docker.com/products/docker-desktop/)
+
+## Getting up and running locally
+
+1. Clone repository
+```
+git clone https://github.com/scriptogre/django-requests-web-app.git
+```
+2. Cd to project directory
+```
+cd "<path>/django-requests-web-app"
+```
+3. Inside root project dir, create a folder called ".env"
+4. Build Docker image (might take a minute)
+```
+docker-compose -f local.yml build
+```
+
 ## Settings
 
 Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
