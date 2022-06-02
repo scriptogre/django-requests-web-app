@@ -15,7 +15,7 @@ License: MIT
 
 ## Features
 1. **Modern Material Design** (including Django admin panel)
-2. **Admin Dashboard** (purchasing requests statistics, latest requests, users)
+2. **Dashboard** (purchasing requests statistics, latest requests, users)
 3. **Modal Popups** (create, edit, delete request dialog)
 4. **DataTables integrated**
 
