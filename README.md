@@ -13,6 +13,19 @@ License: MIT
 [![Requests-list.png](https://i.postimg.cc/CK91s9Sr/Requests-list.png)](https://postimg.cc/qtX4kbt2)
 [![admin-login.png](https://i.postimg.cc/xTVm2Nrp/admin-login.png)](https://postimg.cc/dDn3R1VG)
 
+## Features
+1. **Modern Material Design** (including Django admin panel)
+2. **Admin Dashboard** (purchasing requests statistics, latest requests, users)
+3. **Modal Popups** (create, edit, delete request dialog)
+4. **DataTables integrated**
+
+## TODO
+1. Modal Popups (sign in, sign out)
+2. Asynchronous CRUD requests
+3. Finite State Machine App Design
+4. Implement Celery
+
+
 ## Getting up and running locally
 
 ### Requirements
