@@ -28,7 +28,7 @@ git clone https://github.com/scriptogre/django-requests-web-app.git
 cd "<path>/django-requests-web-app"
 ```
 3. Rename env files .django.example / .postgres.example to .django / .postgres
-The files are found inside django-requests-web-app/.envs/.local
+(inside **django-requests-web-app/.envs/.local**)
 
 4. docker-compose build & up
 ```
