@@ -76,6 +76,7 @@ THIRD_PARTY_APPS = [
     "material",
     "material.admin",
     "floppyforms",
+    "bootstrap_modal_forms",
 ]
 
 LOCAL_APPS = [
