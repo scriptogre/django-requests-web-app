@@ -13,11 +13,12 @@ License: MIT
 [![Requests-list.png](https://i.postimg.cc/CK91s9Sr/Requests-list.png)](https://postimg.cc/qtX4kbt2)
 [![admin-login.png](https://i.postimg.cc/xTVm2Nrp/admin-login.png)](https://postimg.cc/dDn3R1VG)
 
+## Getting up and running locally
+
 ### Requirements
 - [Docker](https://www.docker.com/products/docker-desktop/)
 
-## Getting up and running locally
-
+### Starting project
 1. Clone repository
 ```
 git clone https://github.com/scriptogre/django-requests-web-app.git
@@ -26,15 +27,16 @@ git clone https://github.com/scriptogre/django-requests-web-app.git
 ```
 cd "<path>/django-requests-web-app"
 ```
-3. Inside root project dir, create a folder called ".env"
-4. Build Docker image (might take a minute)
+3. Rename env files ".django.example"/".postgres.example" to ".django"/".postgres"
+The files are found in "django-requests-web-app/.envs/.local"
+4. docker-compose build & up
 ```
 docker-compose -f local.yml build
 ```
-
-## Settings
-
-Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
+```
+docker-compose -f local.yml up
+```
+5. In your browser, go to "localhost:8000" or "127.0.0.1:8000" (0.0.0.0:8000 does not work)
 
 ## Basic Commands
 
@@ -42,10 +44,13 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
 
 -   To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
 
--   To create a **superuser account**, use this command:
-
-        $ python manage.py createsuperuser
-
+-   To create a **superuser account**, use these commands inside a terminal:
+```
+docker-compose -f local.yml run --rm django python manage.py migrate
+```
+```
+docker-compose -f local.yml run --rm django python manage.py createsuperuser
+```
 For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
 
 ### Type checks
@@ -98,6 +103,10 @@ Sentry is an error logging aggregator service. You can sign up for a free accoun
 The system is set up with reasonable defaults, including 404 logging and integration with the WSGI application.
 
 You must set the DSN url in production.
+
+## Settings
+
+Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
 
 ## Deployment
 
