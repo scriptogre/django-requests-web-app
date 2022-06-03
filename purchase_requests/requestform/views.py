@@ -27,6 +27,10 @@ class RequestCreateView(BSModalCreateView):
     success_message = "Success: Request was created."
     success_url = reverse_lazy("requests:list")
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(RequestCreateView, self).form_valid(form)
+
 
 class RequestUpdateView(BSModalUpdateView):
     model = Request
