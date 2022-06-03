@@ -5,6 +5,7 @@ from model_utils import Choices
 from model_utils.fields import StatusField
 
 from purchase_requests.models import TimeStampedModel
+from purchase_requests.users.models import User
 
 
 class RequestQuerySet(models.QuerySet):
@@ -57,6 +58,8 @@ class Request(TimeStampedModel):
     budget = models.CharField(
         verbose_name="Budget", max_length=10, choices=BUDGET, blank=True, null=True
     )
+
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
 
     objects = RequestQuerySet.as_manager()
 
