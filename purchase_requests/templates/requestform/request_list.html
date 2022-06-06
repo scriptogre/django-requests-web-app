@@ -11,10 +11,18 @@
       <button onclick="location.href='{% url 'requestform:grid_list' %}'" id="grid" class="btn btn-light {% if display_type == "grid" %}active{% endif %}" data-mdb-color="dark"><i class="fa-solid fa-grip-vertical"></i> Grid</button>
     </div>
   </div>
-  <!-- DataTable -->
-  <div id="datatable-custom" class="datatable-hover w-100" data-mdb-selectable="true" data-mdb-multi="true"></div>
 
-{% endblock content %}
+  {% if display_type == "grid" %}
+    <!-- Grid -->
+    {% include 'requestform/request_list_grid_display.html' %}
+  {% elif display_type == "list" %}
+        <!-- DataTable -->
+{#    <div id="datatable-custom" class="datatable-hover w-100" data-mdb-selectable="true" data-mdb-multi="true"></div>#}
+    <div id="datatable-custom" class="datatable-hover w-100"></div>
+
+  {% endif %}
+
+{% endblock %}
 
 {% block modal %}
   <!-- Placeholder for the modal -->
@@ -38,73 +46,69 @@
 
 {% block inline_javascript %}
 
-  {# Initializes DataTable#}
-  <script>
-    const customDatatable = document.getElementById('datatable-custom');
+  {% if display_type == "list" %}
+    {# Initializes DataTable#}
+    <script>
+      const customDatatable = document.getElementById('datatable-custom');
 
-    const allRequests = {
-      columns: [
-        {label: '', field: 'actions', sort: false},
-        {label: '{{ verbose_fields.id }}', field: 'id'},
-        {label: '{{ verbose_fields.creator_name }}', field: 'creator_name'},
-        {label: '{{ verbose_fields.creator_email }}', field: 'creator_email'},
-        {label: '{{ verbose_fields.type }}', field: 'type'},
-        {label: '{{ verbose_fields.description }}', field: 'description'},
-        {label: '{{ verbose_fields.reason }}', field: 'reason'},
-        {label: '{{ verbose_fields.status }}', field: 'status'},
-        {label: '{{ verbose_fields.est_cost }}', field: 'est_cost'},
-        {label: '{{ verbose_fields.attachment }}', field: 'attachment', sort: false},
-        {label: '{{ verbose_fields.budget }}', field: 'budget'}
-      ],
-      rows: [
-        {% for p_request in request_list %}
-          {
-            actions: {
-              edit_url: '{% url 'requestform:update' p_request.id %}',
-              delete_url: '{% url 'requestform:delete' p_request.id %}'
+      const allRequests = {
+        columns: [
+          {label: '', field: 'actions', sort: false},
+          {label: '{{ verbose_fields.id }}', field: 'id'},
+          {label: '{{ verbose_fields.creator_name }}', field: 'creator_name'},
+          {label: '{{ verbose_fields.creator_email }}', field: 'creator_email'},
+          {label: '{{ verbose_fields.type }}', field: 'type'},
+          {label: '{{ verbose_fields.description }}', field: 'description'},
+          {label: '{{ verbose_fields.reason }}', field: 'reason'},
+          {label: '{{ verbose_fields.status }}', field: 'status'},
+          {label: '{{ verbose_fields.est_cost }}', field: 'est_cost'},
+          {label: '{{ verbose_fields.attachment }}', field: 'attachment', sort: false},
+          {label: '{{ verbose_fields.budget }}', field: 'budget'}
+        ],
+        rows: [
+          {% for p_request in request_list %}
+            {
+              actions: {
+                detail_url: '{% url 'requestform:detail' p_request.id %}',
+                edit_url: '{% url 'requestform:update' p_request.id %}',
+                delete_url: '{% url 'requestform:delete' p_request.id %}'
+              },
+              id: {{ p_request.id }},
+              creator_name: '{{ p_request.creator_name }}',
+              creator_email: '{{ p_request.creator_email }}',
+              type: '{{ p_request.type }}',
+              description: '{{ p_request.description }}',
+              reason: '{{ p_request.reason }}',
+              status: {
+                approval_status: '{{ p_request.status }}',
+                badge_type: {% if p_request.status == "APPROVED" %}'success'
+                  {% elif p_request.status == "REJECTED" %}'danger'
+                  {% else %}'warning'{% endif %},
+              },
+              est_cost: '€ {{ p_request.est_cost }}',
+              est_delivery: '{{ p_request.est_delivery }}',
+              attachment: '{{ p_request.attachment }}',
+              budget: '{{ p_request.budget }}',
             },
-            id: {{ p_request.id }},
-            creator_name: '{{ p_request.creator_name }}',
-            creator_email: '{{ p_request.creator_email }}',
-            type: '{{ p_request.type }}',
-            description: '{{ p_request.description }}',
-            reason: '{{ p_request.reason }}',
-            status: {
-              approval_status: '{{ p_request.status }}',
-              badge_type: {% if p_request.status == "APPROVED" %}'success'
-                {% elif p_request.status == "REJECTED" %}'danger'
-                {% else %}'warning'{% endif %},
-            },
-            est_cost: '€ {{ p_request.est_cost }}',
-            est_delivery: '{{ p_request.est_delivery }}',
-            attachment: '{{ p_request.attachment }}',
-            budget: '{{ p_request.budget }}',
-          },
-        {% endfor %}
-      ].map((row) => {
-        return {
-          ...row,
-          actions: `
-          <div id="actions">
-            <button type="button" class="btn btn-primary btn-floating btn-sm update-request" data-form-url='${row.actions.edit_url}'>
-                <i class="fas fa-edit"></i>
-            </button>
-            <button type="button" class="btn btn-danger btn-floating btn-sm delete-request" data-form-url='${row.actions.delete_url}'>
-                <i class="fas fa-trash"></i>
-            </button>
-          </div>`,
+          {% endfor %}
+        ].map((row) => {
+          return {
+            ...row,
+            actions: `{% include 'requestform/action_buttons.html' with detail_url="${row.actions.detail_url}" edit_url="${row.actions.edit_url}" delete_url="${row.actions.delete_url}" %}`,
 
-          status: `
+            status: `
           <span class="badge badge-${row.status.badge_type} rounded-pill d-inline">${row.status.approval_status}</span>`,
-        };
-      }),
-    };
-    new mdb.Datatable(customDatatable, allRequests);
+          };
+        }),
+      };
 
-    customDatatable.addEventListener('selectRows.mdb.datatable', (e) => {
-      console.log(e.selectedRows, e.selectedIndexes, e.allSelected);
-    })
-  </script>
+      new mdb.Datatable(customDatatable, allRequests);
+
+      customDatatable.addEventListener('selectRows.mdb.datatable', (e) => {
+        console.log(e.selectedRows, e.selectedIndexes, e.allSelected);
+      })
+    </script>
+  {% endif %}
 
   {# Initializes modal form #}
   <script type="text/javascript">
@@ -116,22 +120,22 @@
       });
 
       function updateRequestModalForm() {
-          $(".update-request").each(function () {
-            $(this).modalForm({
-              formURL: $(this).data("form-url"),
-            });
+        $(".update-request").each(function () {
+          $(this).modalForm({
+            formURL: $(this).data("form-url"),
           });
-        }
+        });
+      }
       updateRequestModalForm();
 
       function deleteRequestModalForm() {
-          $(".delete-request").each(function () {
-            $(this).modalForm({
-              formURL: $(this).data("form-url"),
-              isDeleteForm: true
-            });
+        $(".delete-request").each(function () {
+          $(this).modalForm({
+            formURL: $(this).data("form-url"),
+            isDeleteForm: true
           });
-        }
+        });
+      }
       deleteRequestModalForm();
 
     });
