@@ -67,7 +67,7 @@
         <!-- Dashboard -->
         <a
           href="{% url 'dashboard' %}"
-          class="list-group-item list-group-item-action py-4"
+          class="list-group-item list-group-item-action py-4 {% if request.resolver_match.view_name == 'dashboard' %}active{% endif %}"
           aria-current="true"
         >
           <i class="fa-solid fa-chart-line fa-fw me-3 fa-lg"></i><span>Dashboard</span>
@@ -77,14 +77,14 @@
         {# TODO: Make notification badge dynamic #}
         <a
           href="{% url 'requestform:list' %}"
-          class="list-group-item list-group-item-action py-4"
+          class="list-group-item list-group-item-action py-4 {% if request.resolver_match.view_name == 'requests:list' or request.resolver_match.view_name == 'requests:grid_list' %}active{% endif %}"
         ><span class="badge rounded-pill badge-notification bg-danger">1</span><i class="fa-solid fa-sack-dollar fa-fw me-3 fa-lg"></i><span>Requests</span>
         </a>
 
         <!-- Users -->
         <a
           href="{% url 'users:list' %}"
-          class="list-group-item list-group-item-action py-4"
+          class="list-group-item list-group-item-action py-4 {% if request.resolver_match.view_name == 'users:list' %}active{% endif %}"
         ><i class="fas fa-users fa-fw me-3 fa-lg"></i><span>Users</span></a
         >
       </div>
