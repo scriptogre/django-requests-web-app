@@ -2,11 +2,13 @@ from django.contrib.auth import get_user_model
 from django.views.generic import ListView
 
 from purchase_requests.requestform.models import Request
+from purchase_requests.utils.mixins import PageTitleViewMixin
 
 
-class DashboardView(ListView):
+class DashboardView(PageTitleViewMixin, ListView):
     model = Request
     template_name = "dashboard/dashboard.html"
+    title = "Dashboard"
 
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)

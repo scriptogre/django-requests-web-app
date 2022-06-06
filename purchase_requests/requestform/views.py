@@ -7,18 +7,26 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
 
+from purchase_requests.utils.mixins import DisplayTypeViewMixin, PageTitleViewMixin
+
 from .forms import CreateRequestForm, UpdateRequestForm
 from .models import Request
 
 
-class RequestListView(ListView):
+class RequestListView(PageTitleViewMixin, DisplayTypeViewMixin, ListView):
     model = Request
     template_name = "requestform/request_list.html"
+    title = "Requests List"
+    display_type = "list"
     extra_context = {
         "verbose_fields": {
             field.name: field.verbose_name.title() for field in Request._meta.fields
         },
     }
+
+
+class RequestListGridView(RequestListView):
+    display_type = "grid"
 
 
 class RequestCreateView(BSModalCreateView):
@@ -39,9 +47,10 @@ class RequestUpdateView(BSModalUpdateView):
     success_url = reverse_lazy("requests:list")
 
 
-class RequestDetailView(DetailView):
+class RequestDetailView(PageTitleViewMixin, DetailView):
     model = Request
-    context_object_name = "request"
+    title = "Request Details"
+    context_object_name = "p_request"
 
 
 class RequestDeleteView(BSModalDeleteView):

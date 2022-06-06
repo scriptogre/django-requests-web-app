@@ -5,12 +5,14 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
+from purchase_requests.utils.mixins import PageTitleViewMixin
+
 User = get_user_model()
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
-
+class UserDetailView(PageTitleViewMixin, LoginRequiredMixin, DetailView):
     model = User
+    title = "User Details"
     slug_field = "username"
     slug_url_kwarg = "username"
 
@@ -18,9 +20,9 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 user_detail_view = UserDetailView.as_view()
 
 
-class UserListView(ListView):
-
+class UserListView(PageTitleViewMixin, ListView):
     model = User
+    title = "Users List"
     extra_context = {
         "verbose_fields": {
             field.name: field.verbose_name.title() for field in User._meta.fields
