@@ -4,27 +4,20 @@
 
 {% block content %}
 
-  <!-- Title -->
-  <div class="container mb-4 col-6">
-    <p class="h1 p-0 text-center">Dashboard</p>
-  </div>
-
   {% include 'dashboard/status_widget.html' %}
 
   <div class="row">
     <!-- LATEST REQUESTS SECTION -->
     <div class="col-xl-7 mb-4">
-      <p class="h2 mb-3 text-center">Latest requests</p>
-      <hr>
       <div class="card card-body">
+        <h5 class="card-title text-center">Last 5 requests</h5>
         {% include 'dashboard/latest_requests_widget.html' %}
       </div>
     </div>
     <!-- USERS SECTION -->
     <div class="col-xl-5 mb-4">
-      <p class="h2 mb-3 text-center">Users</p>
-      <hr>
       <div class="card card-body">
+        <h5 class="card-title text-center">Users</h5>
         {% include 'dashboard/users_widget.html' %}
       </div>
     </div>
