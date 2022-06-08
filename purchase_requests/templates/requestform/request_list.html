@@ -46,7 +46,7 @@
 {% block inline_javascript %}
 
   {% if display_type == "list" %}
-    {# Initializes DataTable#}
+    {# Initializes DataTable #}
     <script>
       const customDatatable = document.getElementById('datatable-custom');
 
@@ -87,10 +87,6 @@
         ],
       };
       new mdb.Datatable(customDatatable, allRequests);
-
-      customDatatable.addEventListener('selectRows.mdb.datatable', (e) => {
-        console.log(e.selectedRows, e.selectedIndexes, e.allSelected);
-      })
     </script>
   {% endif %}
 
