@@ -20,39 +20,36 @@
       <p class="text-muted mb-2">Attachment: <span class="text-body">{{ p_request.attachment }}</span></p>
     </div>
     <div class="card-footer">
-      <div class="h-100 d-flex flex-row justify-content-between align-items-baseline">
-        <button onclick="location.href='{% url 'requestform:detail' p_request.id %}'" type="button" class="btn btn-primary">View Details</button>
-      </div>
+      {#  STEPPER  #}
+      <ul class="stepper" data-mdb-stepper="stepper" data-mdb-stepper-type="vertical">
+        <li class="stepper-step stepper-active">
+          <div class="stepper-head">
+            <span class="stepper-head-icon">1</span>
+            <span class="stepper-head-text">Created</span>
+          </div>
+        </li>
+        <li class="stepper-step">
+          <div class="stepper-head">
+            <span class="stepper-head-icon">2</span>
+            <span class="stepper-head-text">LM/PM</span>
+          </div>
+        </li>
+        <li class="stepper-step">
+          <div class="stepper-head">
+            <span class="stepper-head-icon">3</span>
+            <span class="stepper-head-text">CEO</span>
+          </div>
+        </li>
+        <li class="stepper-step">
+          <div class="stepper-head">
+            <span class="stepper-head-icon">3</span>
+            <span class="stepper-head-text">Done</span>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 
-  {#  STEPPER  #}
-  <ul class="stepper" data-mdb-stepper="stepper" data-mdb-stepper-type="vertical">
-    <li class="stepper-step stepper-active">
-      <div class="stepper-head">
-        <span class="stepper-head-icon">1</span>
-        <span class="stepper-head-text">Created</span>
-      </div>
-    </li>
-    <li class="stepper-step">
-      <div class="stepper-head">
-        <span class="stepper-head-icon">2</span>
-        <span class="stepper-head-text">LM/PM</span>
-      </div>
-    </li>
-    <li class="stepper-step">
-      <div class="stepper-head">
-        <span class="stepper-head-icon">3</span>
-        <span class="stepper-head-text">CEO</span>
-      </div>
-    </li>
-    <li class="stepper-step">
-      <div class="stepper-head">
-        <span class="stepper-head-icon">3</span>
-        <span class="stepper-head-text">Done</span>
-      </div>
-    </li>
-  </ul>
 
 
 
