@@ -31,7 +31,7 @@
               {% url 'requestform:detail' p_request.pk as detail %}
               {% url 'requestform:update' p_request.pk as edit %}
               {% url 'requestform:delete' p_request.pk as delete %}
-              {% include 'requestform/action_buttons.html' with detail_url=detail edit_url=edit delete_url=delete %}
+              {% include 'requestform/action_buttons.html' %}
               <p class="h5">{{ p_request.creator_name }}<i class="fa fa-user px-2" aria-hidden="true"></i></p>
             </div>
           </div>

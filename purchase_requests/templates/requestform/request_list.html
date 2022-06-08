@@ -17,7 +17,6 @@
     {% include 'requestform/request_list_grid_display.html' %}
   {% elif display_type == "list" %}
         <!-- DataTable -->
-{#    <div id="datatable-custom" class="datatable-hover w-100" data-mdb-selectable="true" data-mdb-multi="true"></div>#}
     <div id="datatable-custom" class="datatable-hover w-100"></div>
 
   {% endif %}
@@ -68,40 +67,25 @@
         rows: [
           {% for p_request in request_list %}
             {
-              actions: {
-                detail_url: '{% url 'requestform:detail' p_request.id %}',
-                edit_url: '{% url 'requestform:update' p_request.id %}',
-                delete_url: '{% url 'requestform:delete' p_request.id %}'
-              },
+              actions: `{% include 'requestform/action_buttons.html' %}`,
               id: {{ p_request.id }},
               creator_name: '{{ p_request.creator_name }}',
               creator_email: '{{ p_request.creator_email }}',
               type: '{{ p_request.type }}',
               description: '{{ p_request.description }}',
               reason: '{{ p_request.reason }}',
-              status: {
-                approval_status: '{{ p_request.status }}',
-                badge_type: {% if p_request.status == "APPROVED" %}'success'
-                  {% elif p_request.status == "REJECTED" %}'danger'
-                  {% else %}'warning'{% endif %},
-              },
+              status: `<span class="badge badge-{% if p_request.status == "APPROVED" %}success
+            {% elif p_request.status == "REJECTED" %}danger
+            {% else %}warning{% endif %}
+            rounded-pill d-inline">{{ p_request.status }}</span>`,
               est_cost: '€ {{ p_request.est_cost }}',
               est_delivery: '{{ p_request.est_delivery }}',
               attachment: '{{ p_request.attachment }}',
               budget: '{{ p_request.budget }}',
             },
           {% endfor %}
-        ].map((row) => {
-          return {
-            ...row,
-            actions: `{% include 'requestform/action_buttons.html' with detail_url="${row.actions.detail_url}" edit_url="${row.actions.edit_url}" delete_url="${row.actions.delete_url}" %}`,
-
-            status: `
-          <span class="badge badge-${row.status.badge_type} rounded-pill d-inline">${row.status.approval_status}</span>`,
-          };
-        }),
+        ],
       };
-
       new mdb.Datatable(customDatatable, allRequests);
 
       customDatatable.addEventListener('selectRows.mdb.datatable', (e) => {
