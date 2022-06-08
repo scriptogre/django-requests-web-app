@@ -22,7 +22,7 @@ user_detail_view = UserDetailView.as_view()
 
 class UserListView(PageTitleViewMixin, ListView):
     model = User
-    title = "Users List"
+    title = "Users"
     extra_context = {
         "verbose_fields": {
             field.name: field.verbose_name.title() for field in User._meta.fields

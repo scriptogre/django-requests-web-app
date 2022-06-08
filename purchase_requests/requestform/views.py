@@ -16,7 +16,7 @@ from .models import Request
 class RequestListView(PageTitleViewMixin, DisplayTypeViewMixin, ListView):
     model = Request
     template_name = "requestform/request_list.html"
-    title = "Requests List"
+    title = "Requests"
     display_type = "list"
     extra_context = {
         "verbose_fields": {
