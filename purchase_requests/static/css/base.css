@@ -6,6 +6,11 @@ body {
     padding-left: 240px;
   }
 }
+@media (min-width: 1920px) {
+  main {
+    padding-left: 120px;
+  }
+}
 
 /* Sidebar */
 .sidebar {
