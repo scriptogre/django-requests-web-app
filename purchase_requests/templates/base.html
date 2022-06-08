@@ -67,7 +67,7 @@
         <!-- Dashboard -->
         <a
           href="{% url 'dashboard' %}"
-          class="list-group-item list-group-item-action py-4 {% if request.resolver_match.view_name == 'dashboard' %}active{% endif %}"
+          class="list-group-item list-group-item-action py-4 ripple {% if request.resolver_match.view_name == 'dashboard' %}active{% endif %}"
           aria-current="true"
         >
           <i class="fa-solid fa-chart-line fa-fw me-3 fa-lg"></i><span>Dashboard</span>
@@ -76,15 +76,26 @@
         <!-- Requests -->
         {# TODO: Make notification badge dynamic #}
         <a
-          href="{% url 'requestform:list' %}"
-          class="list-group-item list-group-item-action py-4 {% if request.resolver_match.view_name == 'requests:list' or request.resolver_match.view_name == 'requests:grid_list' %}active{% endif %}"
+          class="list-group-item list-group-item-action py-4 ripple {% if 'requests' in request.resolver_match.view_name %}active{% endif %}"
+          aria-current="false"
+          data-mdb-toggle="collapse"
+          href="#collapseRequests"
+          aria-expanded="false"
+          aria-controls="collapseRequests"
         ><span class="badge rounded-pill badge-notification bg-danger">1</span><i class="fa-solid fa-sack-dollar fa-fw me-3 fa-lg"></i><span>Requests</span>
         </a>
-
+        <ul id="collapseRequests" class="collapse hide list-group list-group-flush">
+          <li class="list-group-item py-4 ripple">
+            <a href="{% url 'requestform:list' %}" class="text-reset">My Requests</a>
+          </li>
+          <li class="list-group-item py-4 ripple">
+            <a href="{% url 'requestform:list' %}" class="text-reset">Assigned to Me</a>
+          </li>
+        </ul>
         <!-- Users -->
         <a
           href="{% url 'users:list' %}"
-          class="list-group-item list-group-item-action py-4 {% if request.resolver_match.view_name == 'users:list' %}active{% endif %}"
+          class="list-group-item list-group-item-action py-4 ripple {% if 'users' in request.resolver_match.view_name %}active{% endif %}"
         ><i class="fas fa-users fa-fw me-3 fa-lg"></i><span>Users</span></a
         >
       </div>
@@ -113,7 +124,7 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand px-5" href="#">
         <img
           src="{% static "images/material-ui-logo.png" %}"
           height="50"
@@ -121,6 +132,9 @@
           loading="lazy"
         />
       </a>
+
+      <!-- Title -->
+      <h1 style="margin-left:auto">{{ title }}</h1>
 
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row">
