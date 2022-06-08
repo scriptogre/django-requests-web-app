@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="card card-stepper border border-warning" style="border-radius: 16px;">
+  <div class="card card-stepper border border-{% if p_request.status == "APPROVED" %}success{% elif p_request.status == "REJECTED" %}danger{% else %}warning{% endif %}" style="border-radius: 16px;">
     <div class="card-header">
       <div class="d-flex justify-content-between align-items-center">
         <div><p class="text-muted mb-0">Created <span class="fw-bold text-body">{{ p_request.created }}</span></p></div>
