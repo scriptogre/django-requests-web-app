@@ -11,7 +11,7 @@
                 <p class="mb-0">Total Requests</p>
               </div>
               <div class="align-self-center">
-                <i class="fa-solid fa-sack-dollar fa-5x"></i>
+                <i class="fa-solid fa-sack-dollar fa-5x user-select-none"></i>
               </div>
             </div>
           </div>
@@ -29,13 +29,13 @@
                 <p class="mb-0">Approved</p>
               </div>
               <div class="align-self-center">
-                <i class="fa-regular fa-circle-check text-success fa-3x"></i>
+                <i class="fa-regular fa-circle-check text-success fa-3x user-select-none"></i>
               </div>
             </div>
             <div class="px-md-1">
               <div class="progress mt-3 mb-1 rounded" style="height: 7px">
                 <div
-                  class="progress-bar bg-success"
+                  class="progress-bar bg-success user-select-none"
                   role="progressbar"
                   style="width: {{ approved_percentage }}%"
                   aria-valuenow="{{ approved_percentage }}"
@@ -56,13 +56,13 @@
                 <p class="mb-0">Pending</p>
               </div>
               <div class="align-self-center">
-                <i class="fa-regular fa-circle-question text-warning fa-3x"></i>
+                <i class="fa-regular fa-circle-question text-warning fa-3x user-select-none"></i>
               </div>
             </div>
             <div class="px-md-1">
               <div class="progress mt-3 mb-1 rounded" style="height: 7px">
                 <div
-                  class="progress-bar bg-warning"
+                  class="progress-bar bg-warning user-select-none"
                   role="progressbar"
                   style="width: {{ pending_percentage }}%"
                   aria-valuenow="{{ pending_percentage }}"
@@ -83,13 +83,13 @@
                 <p class="mb-0">Rejected</p>
               </div>
               <div class="align-self-center">
-                <i class="fa-regular fa-circle-xmark text-danger fa-3x"></i>
+                <i class="fa-regular fa-circle-xmark text-danger fa-3x user-select-none"></i>
               </div>
             </div>
             <div class="px-md-1">
               <div class="progress mt-3 mb-1 rounded" style="height: 7px">
                 <div
-                  class="progress-bar bg-danger"
+                  class="progress-bar bg-danger user-select-none"
                   role="progressbar"
                   style="width: {{ rejected_percentage }}%"
                   aria-valuenow="{{ rejected_percentage }}"
