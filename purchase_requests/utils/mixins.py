@@ -16,6 +16,9 @@ class PageTitleViewMixin:
 
 class DisplayTypeViewMixin:
     display_type = ""
+    """
+    Adds a context variable display_type which can be used to render different templates
+    """
 
     def get_display_type(self):
         return self.display_type
