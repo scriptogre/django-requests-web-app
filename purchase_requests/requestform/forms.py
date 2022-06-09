@@ -29,6 +29,12 @@ class ParentRequestForm(BSModalModelForm):
 class CreateRequestForm(ParentRequestForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["creator_name"].initial = "John Doe"
+        self.fields["creator_email"].initial = "john@doe.com"
+        self.fields["description"].initial = "This might be a description"
+        self.fields["reason"].initial = "This is an example reason"
+        self.fields["est_cost"].initial = "123"
+        self.fields["est_delivery"].initial = "2022-04-20"
         self.helper.form_id = "createRequest"
         self.helper.layout = Layout(
             Div(
