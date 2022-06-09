@@ -6,7 +6,6 @@
 
   const latestRequests = {
     columns: [
-      { label: '', field: 'actions', sort: false},
       { label: '{{ verbose_fields.status }}', field: 'status' },
       { label: '{{ verbose_fields.id }}', field: 'id' },
       { label: '{{ verbose_fields.creator_name }}', field: 'creator_name' },
@@ -15,39 +14,15 @@
     rows: [
       {% for p_request in request_list %}
         {
-          actions       : {
-                          edit_url: '{% url 'requestform:update' p_request.id %}',
-                          delete_url: '{% url 'requestform:delete' p_request.id %}'
-                          },
-          status        : {
-                          approval_status: '{{ p_request.status }}',
-                          badge_type: {% if p_request.status == "APPROVED" %}'success'
-                                      {% elif p_request.status == "REJECTED" %}'danger'
-                                      {% else %}'warning'{% endif %},
-                          },
+          status        : `<span class="badge badge-{% if p_request.status == "APPROVED" %}success
+                                      {% elif p_request.status == "REJECTED" %}danger
+                                      {% else %}warning{% endif %} rounded-pill d-inline">{{ p_request.status }}</span>`,
           id            : {{ p_request.id }},
           creator_name  : '{{ p_request.creator_name }}',
-
           est_cost      : '€ {{ p_request.est_cost }}',
         },
       {% endfor %}
-    ].map((row) => {
-      return {
-        ...row,
-        actions: `
-          <div class="" id="actions">
-            <button type="button" class="btn btn-primary btn-floating btn-sm update-request" data-form-url='${row.actions.edit_url}'>
-                <i class="fas fa-edit"></i>
-            </button>
-            <button type="button" class="btn btn-danger btn-floating btn-sm delete-request" data-form-url='${row.actions.delete_url}'>
-                <i class="fas fa-trash"></i>
-            </button>
-          </div>`,
-
-        status: `
-          <span class="badge badge-${row.status.badge_type} rounded-pill d-inline">${row.status.approval_status}</span>`,
-      };
-    }),
+    ]
   }
   new mdb.Datatable(customDatatable, latestRequests)
 
