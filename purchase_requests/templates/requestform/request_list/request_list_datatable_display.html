@@ -1,0 +1,44 @@
+<div id="datatable-custom" class="datatable-hover w-100"></div>
+<script>
+  const customDatatable = document.getElementById('datatable-custom');
+
+  const allRequests = {
+    columns: [
+      {label: '', field: 'actions', sort: false},
+      {label: '{{ verbose_fields.id }}', field: 'id'},
+      {label: '{{ verbose_fields.status }}', field: 'status'},
+      {label: '{{ verbose_fields.creator_name }}', field: 'creator_name'},
+      {label: '{{ verbose_fields.creator_email }}', field: 'creator_email'},
+      {label: '{{ verbose_fields.type }}', field: 'type'},
+      {label: '{{ verbose_fields.description }}', field: 'description'},
+      {label: '{{ verbose_fields.reason }}', field: 'reason'},
+      {label: '{{ verbose_fields.est_cost }}', field: 'est_cost'},
+      {label: '{{ verbose_fields.attachment }}', field: 'attachment', sort: false},
+      {label: '{{ verbose_fields.budget }}', field: 'budget'}
+    ],
+    rows: [
+      {% for p_request in request_list %}
+        {
+          actions: `{% include 'requestform/request_list/request_list_action_buttons.html' %}`,
+          id: {{ p_request.id }},
+          status: `<span class="badge badge-{% if p_request.status == "APPROVED" %}success
+            {% elif p_request.status == "REJECTED" %}danger
+            {% else %}warning{% endif %}
+            rounded-pill d-inline">{{ p_request.status }}</span>`,
+          creator_name: '{{ p_request.creator_name }}',
+          creator_email: '{{ p_request.creator_email }}',
+          type: '{{ p_request.get_type_display }}',
+          {# TODO: Fix DataTable sorting for Description/Reason #}
+          description: '{{ p_request.description }}',
+          reason: '{{ p_request.reason }}',
+          est_cost: '€ {{ p_request.est_cost }}',
+          est_delivery: '{{ p_request.est_delivery }}',
+          attachment: '{{ p_request.attachment }}',
+          budget: '{{ p_request.budget }}',
+        },
+      {% endfor %}
+    ],
+  };
+
+  new mdb.Datatable(customDatatable, allRequests);
+</script>
