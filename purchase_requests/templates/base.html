@@ -73,25 +73,24 @@
           <i class="fa-solid fa-chart-line fa-fw me-3 fa-lg"></i><span>Dashboard</span>
         </a>
 
-        <!-- Requests -->
+        <!-- My Requests -->
         {# TODO: Make notification badge dynamic #}
         <a
-          class="list-group-item list-group-item-action py-4 ripple {% if 'requests' in request.resolver_match.view_name %}active{% endif %}"
-          aria-current="false"
-          data-mdb-toggle="collapse"
-          href="#collapseRequests"
-          aria-expanded="false"
-          aria-controls="collapseRequests"
-        ><span class="badge rounded-pill badge-notification bg-danger">1</span><i class="fa-solid fa-sack-dollar fa-fw me-3 fa-lg"></i><span>Requests</span>
+          class="list-group-item list-group-item-action py-4 ripple {% if request.resolver_match.view_name == 'requests:my_requests' %}active{% endif %}"
+          aria-current="true"
+          href="{% url 'requests:my_requests' %}"
+        ><i class="fa-solid fa-user-plus fa-fw me-3 fa-lg"></i><span>My Requests</span>
         </a>
-        <ul id="collapseRequests" class="collapse hide list-group list-group-flush">
-          <li class="list-group-item py-4 ripple">
-            <a href="{% url 'requestform:list' %}" class="text-reset">My Requests</a>
-          </li>
-          <li class="list-group-item py-4 ripple">
-            <a href="{% url 'requestform:list' %}" class="text-reset">Assigned to Me</a>
-          </li>
-        </ul>
+
+        <!-- Pending -->
+        {# TODO: Make notification badge dynamic #}
+        <a
+          class="list-group-item list-group-item-action py-4 ripple {% if request.resolver_match.view_name == 'requests:pending_requests' %}active{% endif %}"
+          aria-current="true"
+          href="{% url 'requests:pending_requests' %}"
+        ><span class="badge rounded-pill badge-notification bg-danger">1</span><i class="fa-solid fa-user-clock fa-fw me-3 fa-lg"></i><span>Pending</span>
+        </a>
+
         <!-- Users -->
         <a
           href="{% url 'users:list' %}"
@@ -124,7 +123,7 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand px-5" href="#">
+      <a class="navbar-brand ps-5" href="#">
         <img
           src="{% static "images/material-ui-logo.png" %}"
           height="50"
