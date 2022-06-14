@@ -40,8 +40,6 @@ cd ./django-requests-web-app/
 2. docker-compose build & up
 ```
 docker-compose -f local.yml build
-```
-```
 docker-compose -f local.yml up
 ```
 3. In your browser, go to "localhost:8000" or "127.0.0.1:8000" (0.0.0.0:8000 does not work)
