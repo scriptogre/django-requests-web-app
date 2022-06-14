@@ -32,25 +32,21 @@ License: MIT
 - [Docker](https://www.docker.com/products/docker-desktop/)
 
 ### Starting project
-1. Clone repository
+1. Clone repository & cd to project
 ```
 git clone https://github.com/scriptogre/django-requests-web-app.git
 ```
-2. Cd to project directory
 ```
 cd "<path>/django-requests-web-app"
 ```
-3. Rename env files .django.example / .postgres.example to .django / .postgres
-(inside **django-requests-web-app/.envs/.local**)
-
-4. docker-compose build & up
+2. docker-compose build & up
 ```
 docker-compose -f local.yml build
 ```
 ```
 docker-compose -f local.yml up
 ```
-5. In your browser, go to "localhost:8000" or "127.0.0.1:8000" (0.0.0.0:8000 does not work)
+3. In your browser, go to "localhost:8000" or "127.0.0.1:8000" (0.0.0.0:8000 does not work)
 
 ## Basic Commands
 
