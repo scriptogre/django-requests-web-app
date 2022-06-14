@@ -18,7 +18,7 @@ django-allauth==0.50.0  # https://github.com/pennersr/django-allauth
 django-crispy-forms==1.14.0  # https://github.com/django-crispy-forms/django-crispy-forms
 crispy-bootstrap5==0.6  # https://github.com/django-crispy-forms/crispy-bootstrap5
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
-django-fsm==2.7.0  # https://github.com/viewflow/django-fsm
+django-fsm==2.8.0  # https://github.com/viewflow/django-fsm
 django-material-admin==1.8.6  # https://github.com/MaistrenkoAnton/django-material-admin
 django-floppyforms==1.9.0  # https://github.com/jazzband/django-floppyforms
 django-bootstrap-modal-forms==2.2.0  # https://github.com/trco/django-bootstrap-modal-forms
