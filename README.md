@@ -35,9 +35,7 @@ License: MIT
 1. Clone repository & cd to project
 ```
 git clone https://github.com/scriptogre/django-requests-web-app.git
-```
-```
-cd "<path>/django-requests-web-app"
+cd ./django-requests-web-app/
 ```
 2. docker-compose build & up
 ```
