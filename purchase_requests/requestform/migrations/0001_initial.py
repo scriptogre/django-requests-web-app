@@ -8,29 +8,97 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Request',
+            name="Request",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('modified', models.DateTimeField(auto_now=True)),
-                ('status', model_utils.fields.StatusField(choices=[('APPROVED', 'Approved'), ('PENDING', 'Pending'), ('REJECTED', 'Rejected')], db_index=True, default='PENDING', max_length=100, no_check_for_status=True, verbose_name='Status')),
-                ('creator_name', models.CharField(max_length=150, verbose_name='Name')),
-                ('creator_email', models.EmailField(max_length=254, verbose_name='Email')),
-                ('type', models.CharField(choices=[('ITEM', 'Item'), ('SERVICE', 'Service'), ('WORK_ORDER', 'Work Order')], default='ITEM', max_length=10, verbose_name='Request Type')),
-                ('description', models.TextField(blank=True, max_length=256, null=True, verbose_name='Description')),
-                ('reason', models.TextField(max_length=256, verbose_name='Reason')),
-                ('est_cost', models.DecimalField(decimal_places=2, max_digits=6, verbose_name='Estimated Cost')),
-                ('est_delivery', models.DateField(verbose_name='Estimated Delivery Date')),
-                ('attachment', models.FileField(blank=True, upload_to='uploads/%Y/%m/%d/', verbose_name='Attachment')),
-                ('budget', models.CharField(blank=True, choices=[('PROJECT', 'Project'), ('DEPARTMENT', 'Department')], max_length=10, null=True, verbose_name='Budget')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("modified", models.DateTimeField(auto_now=True)),
+                (
+                    "status",
+                    model_utils.fields.StatusField(
+                        choices=[
+                            ("APPROVED", "Approved"),
+                            ("PENDING", "Pending"),
+                            ("REJECTED", "Rejected"),
+                        ],
+                        db_index=True,
+                        default="PENDING",
+                        max_length=100,
+                        no_check_for_status=True,
+                        verbose_name="Status",
+                    ),
+                ),
+                ("creator_name", models.CharField(max_length=150, verbose_name="Name")),
+                (
+                    "creator_email",
+                    models.EmailField(max_length=254, verbose_name="Email"),
+                ),
+                (
+                    "type",
+                    models.CharField(
+                        choices=[
+                            ("ITEM", "Item"),
+                            ("SERVICE", "Service"),
+                            ("WORK_ORDER", "Work Order"),
+                        ],
+                        default="ITEM",
+                        max_length=10,
+                        verbose_name="Request Type",
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True,
+                        max_length=256,
+                        null=True,
+                        verbose_name="Description",
+                    ),
+                ),
+                ("reason", models.TextField(max_length=256, verbose_name="Reason")),
+                (
+                    "est_cost",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=6, verbose_name="Estimated Cost"
+                    ),
+                ),
+                (
+                    "est_delivery",
+                    models.DateField(verbose_name="Estimated Delivery Date"),
+                ),
+                (
+                    "attachment",
+                    models.FileField(
+                        blank=True,
+                        upload_to="uploads/%Y/%m/%d/",
+                        verbose_name="Attachment",
+                    ),
+                ),
+                (
+                    "budget",
+                    models.CharField(
+                        blank=True,
+                        choices=[("PROJECT", "Project"), ("DEPARTMENT", "Department")],
+                        max_length=10,
+                        null=True,
+                        verbose_name="Budget",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]
