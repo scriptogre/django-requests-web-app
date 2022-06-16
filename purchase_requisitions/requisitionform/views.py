@@ -9,15 +9,13 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
 
-from purchase_requisitions.utils.mixins import DisplayTypeViewMixin, PageTitleViewMixin
+from purchase_requisitions.utils.mixins import PageTitleViewMixin
 
 from .forms import CreateRequisitionForm, UpdateRequisitionForm
 from .models import Requisition
 
 
-class RequisitionListView(
-    PageTitleViewMixin, DisplayTypeViewMixin, LoginRequiredMixin, ListView
-):
+class RequisitionListView(PageTitleViewMixin, LoginRequiredMixin, ListView):
     model = Requisition
     template_name = "requisitionform/requisition_list/requisition_list.html"
     extra_context = {
@@ -25,11 +23,6 @@ class RequisitionListView(
             field.name: field.verbose_name.title() for field in Requisition._meta.fields
         },
     }
-
-    def dispatch(self, request, *args, **kwargs):
-        """Get the display_type kwarg from url, defaults to datatable"""
-        self.display_type = kwargs.get("display_type", "datatable")
-        return super().dispatch(request, *args, **kwargs)
 
 
 class AllRequisitionListView(UserPassesTestMixin, RequisitionListView):
@@ -68,21 +61,13 @@ class RequisitionUpdateView(LoginRequiredMixin, BSModalUpdateView):
     model = Requisition
     form_class = UpdateRequisitionForm
     success_message = "Success: Requisition was updated."
-
-    def get_success_url(self):
-        if "display_type" in self.kwargs:
-            display_type = self.kwargs["display_type"]
-        else:
-            display_type = "datatable"
-        return reverse_lazy(
-            "requisitions:my_requisitions", kwargs={"display_type": display_type}
-        )
+    success_url = reverse_lazy("requisitions:my_requisitions")
 
 
 class RequisitionDetailView(PageTitleViewMixin, LoginRequiredMixin, DetailView):
     model = Requisition
     title = "Requisition Details"
-    context_object_name = "p_requisition"
+    context_object_name = "requisition"
 
 
 class RequisitionDeleteView(UserPassesTestMixin, LoginRequiredMixin, BSModalDeleteView):

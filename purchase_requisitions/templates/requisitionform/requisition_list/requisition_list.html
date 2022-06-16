@@ -6,11 +6,7 @@
       {% include 'requisitionform/requisition_list/requisition_list_card_header.html' %}
     </div>
     <div class="card-body">
-      {% if display_type == "datatable" %}
-        {% include 'requisitionform/requisition_list/requisition_list_datatable_display.html' %}
-      {% elif display_type == "grid" %}
-        {% include 'requisitionform/requisition_list/requisition_list_grid_display.html' %}
-      {% endif %}
+      <div id="datatable-custom" class="datatable-hover w-100"></div>
     </div>
   </div>
 {% endblock %}
@@ -34,33 +30,76 @@
 {% endblock %}
 
 {% block inline_javascript %}
+  <script>
+    const customDatatable = document.getElementById('datatable-custom');
+
+    const allRequisitions = {
+      columns: [
+        {label: '', field: 'actions', sort: false},
+        {label: '{{ verbose_fields.id }}', field: 'id'},
+        {label: '{{ verbose_fields.status }}', field: 'status'},
+        {label: '{{ verbose_fields.creator_name }}', field: 'creator_name'},
+        {label: '{{ verbose_fields.creator_email }}', field: 'creator_email'},
+        {label: '{{ verbose_fields.requisition_type }}', field: 'requisition_type'},
+        {label: '{{ verbose_fields.description }}', field: 'description'},
+        {label: '{{ verbose_fields.reason }}', field: 'reason'},
+        {label: '{{ verbose_fields.est_cost }}', field: 'est_cost'},
+        {label: '{{ verbose_fields.attachment }}', field: 'attachment', sort: false},
+        {label: '{{ verbose_fields.budget }}', field: 'budget'}
+      ],
+      rows: [
+        {% for p_requisition in requisition_list %}
+          {
+            actions: `{% include 'requisitionform/requisition_list/requisition_list_action_buttons.html' %}`,
+            id: {{ p_requisition.id }},
+            status: `<span class="badge badge-{% if p_requisition.status == "APPROVED" %}success
+            {% elif p_requisition.status == "REJECTED" %}danger
+            {% else %}warning{% endif %}
+            rounded-pill d-inline">{{ p_requisition.status }}</span>`,
+            creator_name: '{{ p_requisition.creator_name }}',
+            creator_email: '{{ p_requisition.creator_email }}',
+            requisition_type: '{{ p_requisition.get_requisition_type_display }}',
+            {# TODO: Fix DataTable sorting for Description/Reason #}
+            description: '{{ p_requisition.description }}',
+            reason: '{{ p_requisition.reason }}',
+            est_cost: '€ {{ p_requisition.est_cost }}',
+            est_delivery: '{{ p_requisition.est_delivery }}',
+            attachment: '{{ p_requisition.attachment }}',
+            budget: '{{ p_requisition.budget }}',
+          },
+        {% endfor %}
+      ],
+    };
+
+    new mdb.Datatable(customDatatable, allRequisitions);
+  </script>
   <script type="text/javascript">
-  $(document).ready(function() {
+    $(document).ready(function() {
 
-    $("#create-requisition").modalForm({
-      formURL: "{% url 'requisitions:add' %}",
-      errorClass: ".is-invalid",
+      $("#create-requisition").modalForm({
+        formURL: "{% url 'requisitions:add' %}",
+        errorClass: ".is-invalid",
+      });
+
+      function updateRequisitionModalForm() {
+        $(".update-requisition").each(function () {
+          $(this).modalForm({
+            formURL: $(this).data("form-url"),
+          });
+        });
+      }
+      updateRequisitionModalForm();
+
+      function deleteRequisitionModalForm() {
+        $(".delete-requisition").each(function () {
+          $(this).modalForm({
+            formURL: $(this).data("form-url"),
+            isDeleteForm: true
+          });
+        });
+      }
+      deleteRequisitionModalForm();
+
     });
-
-    function updateRequisitionModalForm() {
-      $(".update-requisition").each(function () {
-        $(this).modalForm({
-          formURL: $(this).data("form-url"),
-        });
-      });
-    }
-    updateRequisitionModalForm();
-
-    function deleteRequisitionModalForm() {
-      $(".delete-requisition").each(function () {
-        $(this).modalForm({
-          formURL: $(this).data("form-url"),
-          isDeleteForm: true
-        });
-      });
-    }
-    deleteRequisitionModalForm();
-
-  });
-</script>
+  </script>
 {% endblock %}
