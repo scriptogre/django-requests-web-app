@@ -6,8 +6,8 @@ from pathlib import Path
 import environ
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# purchase_requests/
-APPS_DIR = ROOT_DIR / "purchase_requests"
+# purchase_requisitions/
+APPS_DIR = ROOT_DIR / "purchase_requisitions"
 env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
@@ -72,7 +72,6 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "django_celery_beat",
-    "django_fsm",
     "material",
     "material.admin",
     "floppyforms",
@@ -80,9 +79,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "purchase_requests.users",
-    "purchase_requests.requestform",
-    "purchase_requests.dashboard"
+    "purchase_requisitions.users",
+    "purchase_requisitions.requisitionform",
+    "purchase_requisitions.dashboard"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -91,7 +90,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "purchase_requests.contrib.sites.migrations"}
+MIGRATION_MODULES = {"sites": "purchase_requisitions.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -186,7 +185,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "purchase_requests.users.context_processors.allauth_settings",
+                "purchase_requisitions.users.context_processors.allauth_settings",
             ],
         },
     }
@@ -292,19 +291,21 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "purchase_requests.users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "purchase_requisitions.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-ACCOUNT_FORMS = {"signup": "purchase_requests.users.forms.UserSignupForm"}
+ACCOUNT_FORMS = {"signup": "purchase_requisitions.users.forms.UserSignupForm"}
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "purchase_requests.users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "purchase_requisitions.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-SOCIALACCOUNT_FORMS = {"signup": "purchase_requests.users.forms.UserSocialSignupForm"}
+SOCIALACCOUNT_FORMS = {
+    "signup": "purchase_requisitions.users.forms.UserSocialSignupForm"
+}
 
 
 # Your stuff...
 # ------------------------------------------------------------------------------
 MATERIAL_ADMIN_SITE = {
-    "HEADER": "Purchasing Requests Admin Page",  # Admin site header
+    "HEADER": "Purchasing Requisitions Admin Page",  # Admin site header
     "TITLE": "Admin Page",  # Admin site title
     "FAVICON": "/images/favicons",  # Admin site favicon (path to static should be specified)
     "MAIN_BG_COLOR": "#708090",  # Admin site main color, css color should be specified

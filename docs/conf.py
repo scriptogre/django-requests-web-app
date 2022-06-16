@@ -12,6 +12,7 @@
 
 import os
 import sys
+
 import django
 
 if os.getenv("READTHEDOCS", default=False) == "True":
@@ -27,7 +28,7 @@ django.setup()
 
 # -- Project information -----------------------------------------------------
 
-project = "Purchase Requests"
+project = "Purchase Requisitions"
 copyright = """2022, Tanul Christian"""
 author = "Tanul Christian"
 
