@@ -10,7 +10,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: purchase_requests_production_django
+    image: purchase_requisitions_production_django
     platform: linux/x86_64
     depends_on:
       - postgres
@@ -24,7 +24,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: purchase_requests_production_postgres
+    image: purchase_requisitions_production_postgres
     volumes:
       - production_postgres_data:/var/lib/postgresql/data:Z
       - production_postgres_data_backups:/backups:z
@@ -35,7 +35,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/traefik/Dockerfile
-    image: purchase_requests_production_traefik
+    image: purchase_requisitions_production_traefik
     depends_on:
       - django
     volumes:
@@ -50,15 +50,15 @@ services:
 
   celeryworker:
     <<: *django
-    image: purchase_requests_production_celeryworker
+    image: purchase_requisitions_production_celeryworker
     command: /start-celeryworker
 
   celerybeat:
     <<: *django
-    image: purchase_requests_production_celerybeat
+    image: purchase_requisitions_production_celerybeat
     command: /start-celerybeat
 
   flower:
     <<: *django
-    image: purchase_requests_production_flower
+    image: purchase_requisitions_production_flower
     command: /start-flower

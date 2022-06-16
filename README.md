@@ -1,6 +1,6 @@
-# Purchase Requests
+# Purchase Requisitions
 
-Web application for automating purchase requests by sending mails for requesting approval.
+Web application for automating Purchase Requisitions by sending mails for requisitioning approval.
 
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
@@ -10,13 +10,13 @@ License: MIT
 ## Screenshots
 [![Dashboard.png](https://i.postimg.cc/rF49GLT3/Dashboard.png)](https://postimg.cc/1f96P2fr)
 [![Update-modal.png](https://i.postimg.cc/yxmkdnqQ/Update-modal.png)](https://postimg.cc/Wq42YG1g)
-[![Requests-list.png](https://i.postimg.cc/CK91s9Sr/Requests-list.png)](https://postimg.cc/qtX4kbt2)
+[![Requisitions-list.png](https://i.postimg.cc/CK91s9Sr/Requests-list.png)](https://postimg.cc/qtX4kbt2)
 [![admin-login.png](https://i.postimg.cc/xTVm2Nrp/admin-login.png)](https://postimg.cc/dDn3R1VG)
 
 ## Features
 1. **Modern Material Design** (including Django admin panel)
-2. **Dashboard** (purchasing requests statistics, latest requests, users)
-3. **Modal Popups** (create, edit, delete request dialog)
+2. **Dashboard** (purchasing requisitions statistics, latest requisitions, users)
+3. **Modal Popups** (create, edit, delete requisition dialog)
 4. **DataTables integrated**
 
 ## TODO
@@ -34,14 +34,14 @@ License: MIT
 ### Starting project
 1. Clone repository
 ```
-git clone https://github.com/scriptogre/django-requests-web-app.git
+git clone https://github.com/scriptogre/django-requisitions-web-app.git
 ```
 2. Cd to project directory
 ```
-cd "<path>/django-requests-web-app"
+cd "<path>/django-requisitions-web-app"
 ```
 3. Rename env files .django.example / .postgres.example to .django / .postgres
-(inside **django-requests-web-app/.envs/.local**)
+(inside **django-requisitions-web-app/.envs/.local**)
 
 4. docker-compose build & up
 ```
@@ -71,7 +71,7 @@ For convenience, you can keep your normal user logged in on Chrome and your supe
 
 Running type checks with mypy:
 
-    $ mypy purchase_requests
+    $ mypy purchase_requisitions
 
 ### Test coverage
 
@@ -96,7 +96,7 @@ This app comes with Celery.
 To run a celery worker:
 
 ``` bash
-cd purchase_requests
+cd purchase_requisitions
 celery -A config.celery_app worker -l info
 ```
 

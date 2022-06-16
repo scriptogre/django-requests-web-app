@@ -1,11 +1,11 @@
-#total-requests {
+#total-requisitions {
   background-color: #1F2224;
 }
 
-#pending-requests {
+#pending-requisitions {
   background-color: #FFAA1D;
 }
 
-#approved-requests {
+#approved-requisitions {
   background-color: #26580f;
 }

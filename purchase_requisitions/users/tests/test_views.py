@@ -8,10 +8,10 @@ from django.http import HttpRequest, HttpResponseRedirect
 from django.test import RequestFactory
 from django.urls import reverse
 
-from purchase_requests.users.forms import UserAdminChangeForm
-from purchase_requests.users.models import User
-from purchase_requests.users.tests.factories import UserFactory
-from purchase_requests.users.views import (
+from purchase_requisitions.users.forms import UserAdminChangeForm
+from purchase_requisitions.users.models import User
+from purchase_requisitions.users.tests.factories import UserFactory
+from purchase_requisitions.users.views import (
     UserRedirectView,
     UserUpdateView,
     user_detail_view,

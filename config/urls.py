@@ -5,7 +5,7 @@ from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
-from purchase_requests.dashboard.views import DashboardView
+from purchase_requisitions.dashboard.views import DashboardView
 
 urlpatterns = [
     path(
@@ -19,11 +19,12 @@ urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
-    path("users/", include("purchase_requests.users.urls", namespace="users")),
+    path("users/", include("purchase_requisitions.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     path(
-        "requests/", include("purchase_requests.requestform.urls", namespace="requests")
+        "requisitions/",
+        include("purchase_requisitions.requisitionform.urls", namespace="requisitions"),
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

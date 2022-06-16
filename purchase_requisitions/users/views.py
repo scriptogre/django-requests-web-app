@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
-from purchase_requests.utils.mixins import PageTitleViewMixin
+from purchase_requisitions.utils.mixins import PageTitleViewMixin
 
 User = get_user_model()
 

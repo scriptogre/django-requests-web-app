@@ -1,0 +1,35 @@
+{% with view=request.resolver_match.view_name %}
+
+<div class="h-100 d-flex flex-row justify-content-between align-items-center p-2">
+
+  <!-- Add Requisition Button -->
+  {% if view == 'requisitions:my_requisitions' %}
+    <button id="create-requisition"
+            type="button"
+            class="btn btn-primary">Add Requisition</button>
+  {% endif %}
+
+ <!-- DataTable/Grid Switch -->
+  <div class="btn-group" style="margin-left:auto;" role="group">
+    <button
+      {% if view == 'requisitions:my_requisitions' %}
+      onclick="location.href='{% url 'requisitions:my_requisitions' display_type='datatable' %}'"
+      {% elif view == 'requisitions:pending_requisitions' %}
+      onclick="location.href='{% url 'requisitions:pending_requisitions' display_type='datatable' %}'"
+      {% endif %}
+      id="list"
+      class="btn btn-light {% if display_type == "datatable" %}active{% endif %}"
+      data-mdb-color="dark"><i class="fa-solid fa-list p-1"></i>Table</button>
+    <button
+      {% if view == 'requisitions:my_requisitions' %}
+      onclick="location.href='{% url 'requisitions:my_requisitions' display_type='grid' %}'"
+      {% elif view == 'requisitions:pending_requisitions' %}
+      onclick="location.href='{% url 'requisitions:pending_requisitions' display_type='grid' %}'"
+      {% endif %}
+      id="grid"
+      class="btn btn-light {% if display_type == "grid" %}active{% endif %}"
+      data-mdb-color="dark"><i class="fa-solid fa-grip-vertical p-1"></i>Grid</button>
+  </div>
+
+</div>
+{% endwith %}
