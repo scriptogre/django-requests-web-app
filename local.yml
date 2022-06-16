@@ -1,16 +1,16 @@
 version: '3'
 
 volumes:
-  purchase_requests_local_postgres_data: {}
-  purchase_requests_local_postgres_data_backups: {}
+  purchase_requisitions_local_postgres_data: {}
+  purchase_requisitions_local_postgres_data_backups: {}
 
 services:
   django: &django
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
-    image: purchase_requests_local_django
-    container_name: purchase_requests_local_django
+    image: purchase_requisitions_local_django
+    container_name: purchase_requisitions_local_django
     platform: linux/x86_64
     depends_on:
       - postgres
@@ -29,17 +29,17 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: purchase_requests_production_postgres
-    container_name: purchase_requests_local_postgres
+    image: purchase_requisitions_production_postgres
+    container_name: purchase_requisitions_local_postgres
     volumes:
-      - purchase_requests_local_postgres_data:/var/lib/postgresql/data:Z
-      - purchase_requests_local_postgres_data_backups:/backups:z
+      - purchase_requisitions_local_postgres_data:/var/lib/postgresql/data:Z
+      - purchase_requisitions_local_postgres_data_backups:/backups:z
     env_file:
       - ./.envs/.local/.postgres
 
   docs:
-    image: purchase_requests_local_docs
-    container_name: purchase_requests_local_docs
+    image: purchase_requisitions_local_docs
+    container_name: purchase_requisitions_local_docs
     platform: linux/x86_64
     build:
       context: .
@@ -49,25 +49,25 @@ services:
     volumes:
       - ./docs:/docs:z
       - ./config:/app/config:z
-      - ./purchase_requests:/app/purchase_requests:z
+      - ./purchase_requisitions:/app/purchase_requisitions:z
     ports:
       - "9000:9000"
     command: /start-docs
 
   mailhog:
     image: mailhog/mailhog:v1.0.0
-    container_name: purchase_requests_local_mailhog
+    container_name: purchase_requisitions_local_mailhog
     ports:
       - "8025:8025"
 
   redis:
     image: redis:6
-    container_name: purchase_requests_local_redis
+    container_name: purchase_requisitions_local_redis
 
   celeryworker:
     <<: *django
-    image: purchase_requests_local_celeryworker
-    container_name: purchase_requests_local_celeryworker
+    image: purchase_requisitions_local_celeryworker
+    container_name: purchase_requisitions_local_celeryworker
     depends_on:
       - redis
       - postgres
@@ -77,8 +77,8 @@ services:
 
   celerybeat:
     <<: *django
-    image: purchase_requests_local_celerybeat
-    container_name: purchase_requests_local_celerybeat
+    image: purchase_requisitions_local_celerybeat
+    container_name: purchase_requisitions_local_celerybeat
     depends_on:
       - redis
       - postgres
@@ -88,8 +88,8 @@ services:
 
   flower:
     <<: *django
-    image: purchase_requests_local_flower
-    container_name: purchase_requests_local_flower
+    image: purchase_requisitions_local_flower
+    container_name: purchase_requisitions_local_flower
     ports:
       - "5555:5555"
     command: /start-flower

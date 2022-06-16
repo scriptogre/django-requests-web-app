@@ -1,0 +1,32 @@
+<div id="datatable-custom" class="datatable-hover"></div>
+
+
+<script>
+  const customDatatable = document.getElementById('datatable-custom');
+
+  const latestRequisitions = {
+    columns: [
+      { label: '{{ verbose_fields.status }}', field: 'status' },
+      { label: '{{ verbose_fields.id }}', field: 'id' },
+      { label: '{{ verbose_fields.creator_name }}', field: 'creator_name' },
+      { label: '{{ verbose_fields.est_cost }}', field: 'est_cost' },
+    ],
+    rows: [
+      {% for p_requisition in requisition_list %}
+        {
+          status        : `<span class="badge badge-{% if p_requisition.status == "APPROVED" %}success
+                                      {% elif p_requisition.status == "REJECTED" %}danger
+                                      {% else %}warning{% endif %} rounded-pill d-inline">{{ p_requisition.status }}</span>`,
+          id            : {{ p_requisition.id }},
+          creator_name  : '{{ p_requisition.creator_name }}',
+          est_cost      : '€ {{ p_requisition.est_cost }}',
+        },
+      {% endfor %}
+    ]
+  }
+  new mdb.Datatable(customDatatable, latestRequisitions)
+
+  customDatatable.addEventListener('selectRows.mdb.datatable', (e) => {
+    console.log(e.selectedRows, e.selectedIndexes, e.allSelected);
+  })
+</script>

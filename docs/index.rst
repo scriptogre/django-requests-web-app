@@ -1,9 +1,9 @@
-.. Purchase Requests documentation master file, created by
+.. Purchase Requisitions documentation master file, created by
    sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Purchase Requests's documentation!
+Welcome to Purchase Requisitions's documentation!
 ======================================================================
 
 .. toctree::

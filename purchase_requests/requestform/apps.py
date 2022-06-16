@@ -1,7 +1,0 @@
-from django.apps import AppConfig
-
-
-class RequestformConfig(AppConfig):
-    default_auto_field = "django.db.models.BigAutoField"
-    name = "purchase_requests.requestform"
-    icon_name = "rotate_right"
