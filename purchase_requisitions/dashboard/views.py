@@ -2,10 +2,10 @@ from django.contrib.auth import get_user_model
 from django.views.generic import ListView
 
 from purchase_requisitions.requisitionform.models import Requisition
-from purchase_requisitions.utils.mixins import PageTitleViewMixin
+from purchase_requisitions.utils.mixins import PageTitleMixin
 
 
-class DashboardView(PageTitleViewMixin, ListView):
+class DashboardView(PageTitleMixin, ListView):
     model = Requisition
     template_name = "dashboard/dashboard.html"
     title = "Dashboard"
