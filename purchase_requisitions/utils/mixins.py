@@ -1,4 +1,4 @@
-class PageTitleViewMixin:
+class PageTitleMixin:
     title = ""
 
     def get_title(self):
