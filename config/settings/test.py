@@ -3,7 +3,7 @@ With these settings, tests run faster.
 """
 
 from .base import *  # noqa
-from .base import env
+from .base import TEMPLATES, env
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -27,3 +27,6 @@ EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+# Enables template debugging for Coverage plugin
+TEMPLATES[0]["OPTIONS"]["debug"] = True
