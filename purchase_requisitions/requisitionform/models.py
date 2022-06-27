@@ -20,7 +20,7 @@ class RequisitionQuerySet(models.QuerySet):
 
 
 class Requisition(TimeStampedModel):
-    REQUEST_TYPE = Choices(
+    REQUISITION_TYPE = Choices(
         ("ITEM", _("Item")),
         ("SERVICE", _("Service")),
         ("WORK_ORDER", _("Work Order")),
@@ -44,8 +44,8 @@ class Requisition(TimeStampedModel):
     requisition_type = models.CharField(
         verbose_name="Requisition Type",
         max_length=10,
-        choices=REQUEST_TYPE,
-        default=REQUEST_TYPE.ITEM,
+        choices=REQUISITION_TYPE,
+        default=REQUISITION_TYPE.ITEM,
     )
     description = models.TextField(
         verbose_name="Description", max_length=256, blank=True, null=True
@@ -62,7 +62,7 @@ class Requisition(TimeStampedModel):
         verbose_name="Budget", max_length=10, choices=BUDGET, blank=True, null=True
     )
 
-    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     objects = RequisitionQuerySet.as_manager()
 
