@@ -76,18 +76,18 @@
         <!-- My Requisitions -->
         {# TODO: Make notification badge dynamic #}
         <a
-          class="list-group-item list-group-item-action py-4 ripple {% if request.resolver_match.view_name == 'requisitions:my_requisitions' %}active{% endif %}"
+          class="list-group-item list-group-item-action py-4 ripple {% if request.resolver_match.view_name == 'requisitions:list_my' %}active{% endif %}"
           aria-current="true"
-          href="{% url 'requisitions:my_requisitions' %}"
+          href="{% url 'requisitions:list_my' %}"
         ><i class="fa-solid fa-user-plus fa-fw me-3 fa-lg"></i><span>My Requisitions</span>
         </a>
 
         <!-- Pending -->
         {# TODO: Make notification badge dynamic #}
         <a
-          class="list-group-item list-group-item-action py-4 ripple {% if request.resolver_match.view_name == 'requisitions:pending_requisitions' %}active{% endif %}"
+          class="list-group-item list-group-item-action py-4 ripple {% if request.resolver_match.view_name == 'requisitions:list_pending' %}active{% endif %}"
           aria-current="true"
-          href="{% url 'requisitions:pending_requisitions' %}"
+          href="{% url 'requisitions:list_pending' %}"
         ><span class="badge rounded-pill badge-notification bg-danger">1</span><i class="fa-solid fa-user-clock fa-fw me-3 fa-lg"></i><span>Pending</span>
         </a>
 
