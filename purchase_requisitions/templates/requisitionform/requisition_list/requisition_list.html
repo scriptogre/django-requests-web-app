@@ -3,7 +3,16 @@
 {% block content %}
   <div class="card">
     <div class="card-header">
-      {% include 'requisitionform/requisition_list/requisition_list_card_header.html' %}
+      <div class="h-100 d-flex flex-row justify-content-between align-items-center p-2">
+
+        <!-- Add Requisition Button -->
+        {% if request.resolver_match.view_name == 'requisitions:list_my' %}
+          <button id="create-requisition"
+                  type="button"
+                  class="btn btn-primary">Add Requisition</button>
+        {% endif %}
+
+      </div>
     </div>
     <div class="card-body">
       <div id="datatable-custom" class="datatable-hover w-100"></div>
