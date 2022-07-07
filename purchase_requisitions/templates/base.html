@@ -62,7 +62,7 @@
     class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
   >
     <!-- Container wrapper -->
-    <div class="container-fluid px-4">
+    <div class="container px-4">
 
       <!-- Toggle button -->
       <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@
       <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Brand -->
-        <a class="navbar-brand me-4" href="#">
+        <a class="navbar-brand mx-4" href="#">
           <img
             src="{% static "images/material-ui-logo.png" %}"
             height="40"
@@ -82,7 +82,7 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-          <li class="nav-item me-2">
+          <li class="nav-item me-4">
             <!-- Dashboard -->
             <a
               href="{% url 'dashboard' %}"
@@ -94,7 +94,7 @@
           </li>
 
           <!-- Requisitions -->
-          <li class="nav-item dropdown me-2">
+          <li class="nav-item dropdown me-4">
             <a class="nav-link dropdown-toggle {% if request.resolver_match.view_name == 'requisitions:list_my' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-sack-dollar fa-fw me-1 fa-xl"></i>Requisitions
             </a>
@@ -120,18 +120,18 @@
           </li>
 
           <!-- Approval Center -->
-          <li class="nav-item me-2">
+          <li class="nav-item me-4">
             {# TODO: Make notification badge dynamic #}
             <a
-              class="nav-link {% if request.resolver_match.view_name == 'requisitions:list_pending' %}active{% endif %}"
+              class="nav-link {% if request.resolver_match.view_name == 'approval_center:index' %}active{% endif %}"
               aria-current="true"
-              href="{% url 'requisitions:list_pending' %}"
+              href="{% url 'approval_center:index' %}"
             ><span class="badge rounded-pill badge-notification bg-danger">1</span><i class="fa-regular fa-circle-check me-1 fa-xl"></i><span>Approval Center</span>
             </a>
           </li>
 
           <!-- Users -->
-          <li class="nav-item me-2">
+          <li class="nav-item me-4">
             <a
               href="{% url 'users:list' %}"
               class="nav-link {% if 'users' in request.resolver_match.view_name %}active{% endif %}"
