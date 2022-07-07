@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="card">
+    <div class="card-body">
+      <div id="datatable-custom" class="datatable-hover w-100"></div>
+      <div class="h-100 d-flex flex-row justify-content-between align-items-center p-2">
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block modal %}
+  <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content"></div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block inline_javascript %}
+  <script>
+    const customDatatable = document.getElementById('datatable-custom');
+
+    const allRequisitions = {
+      columns: [
+        {# Hides the actions column if there are no entries to prevent weird looking DataTable #}
+        {% if requisition_list %} {label: '', field: 'actions', sort: false}, {% endif %}
+        {label: '{{ verbose_fields.id }}', field: 'id'},
+        {label: '{{ verbose_fields.status }}', field: 'status'},
+        {label: '{{ verbose_fields.creator_name }}', field: 'creator_name'},
+        {label: '{{ verbose_fields.creator_email }}', field: 'creator_email'},
+        {label: '{{ verbose_fields.requisition_type }}', field: 'requisition_type'},
+        {label: '{{ verbose_fields.description }}', field: 'description'},
+        {label: '{{ verbose_fields.reason }}', field: 'reason'},
+        {label: '{{ verbose_fields.est_cost }}', field: 'est_cost'},
+        {label: '{{ verbose_fields.attachment }}', field: 'attachment', sort: false},
+        {label: '{{ verbose_fields.budget }}', field: 'budget'}
+      ],
+      rows: [
+        {% for requisition in requisition_list %}
+          {
+            actions: `{% include 'approval_center/approval_actions.html' %}`,
+            id: {{ requisition.id }},
+            status: `<span class="badge badge-{% if requisition.status == "APPROVED" %}success
+            {% elif requisition.status == "REJECTED" %}danger
+            {% else %}warning{% endif %}
+            rounded-pill d-inline">{{ requisition.status }}</span>`,
+            creator_name: '{{ requisition.creator_name }}',
+            creator_email: '{{ requisition.creator_email }}',
+            requisition_type: '{{ requisition.get_requisition_type_display }}',
+            {# TODO: Fix DataTable sorting for Description/Reason #}
+            description: '{{ requisition.description }}',
+            reason: '{{ requisition.reason }}',
+            est_cost: '€ {{ requisition.est_cost }}',
+            est_delivery: '{{ requisition.est_delivery }}',
+            attachment: '{{ requisition.attachment }}',
+            budget: '{{ requisition.budget }}',
+          },
+        {% endfor %}
+      ],
+    };
+
+    new mdb.Datatable(customDatatable, allRequisitions);
+  </script>
+{% endblock %}

@@ -1,0 +1,21 @@
+<!-- Edit Buttons -->
+<div id="edit-actions">
+  <button {% if requisition.status != "PENDING" %}disabled{% endif %}
+    type="button"
+    id="update-entry-{{ requisition.id }}"
+    class="btn btn-white btn-floating btn-sm update-requisition"
+    data-form-url='{% url 'requisitions:update' requisition.id %}'>
+    <i class="fas fa-edit" style="color:#1266F1"></i></button>
+  <button {% if requisition.status != "PENDING" %}disabled{% endif %}
+    type="button"
+    id="delete-entry-{{ requisition.id }}"
+    class="btn btn-danger btn-floating btn-sm delete-requisition"
+    data-form-url='{% url 'requisitions:delete' requisition.id %}'>
+    <i class="fas fa-trash"></i></button>
+  <button
+    type="button"
+    onclick="location.href='{% url 'requisitions:detail' requisition.id %}'"
+    id="view-entry-{{ requisition.id }}"
+    class="btn btn-primary btn-floating btn-sm">
+    <i class="fas fa-eye"></i></button>
+</div>
