@@ -39,8 +39,8 @@ class AllRequisitionsView(UserPassesTestMixin, RequisitionList):
         return self.request.user.is_superuser
 
 
-class PendingRequisitionsView(RequisitionList):
-    title = "Pending Requisitions"
+class ApprovalCenterView(RequisitionList):
+    title = "Approval Center"
 
     def get_queryset(self):
         return Requisition.objects.filter(status=Requisition.STATUS.PENDING)

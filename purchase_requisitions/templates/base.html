@@ -56,120 +56,122 @@
 </head>
 <!--Main Navigation-->
 <header>
-  <!-- Sidebar -->
-  <nav
-    id="sidebarMenu"
-    class="collapse d-lg-block sidebar collapse bg-white"
-  >
-    <div class="position-sticky">
-      <div class="list-group list-group-flush mx-3 mt-4">
-
-        <!-- Dashboard -->
-        <a
-          href="{% url 'dashboard' %}"
-          class="list-group-item list-group-item-action py-4 ripple {% if request.resolver_match.view_name == 'dashboard' %}active{% endif %}"
-          aria-current="true"
-        >
-          <i class="fa-solid fa-chart-line fa-fw me-3 fa-lg"></i><span>Dashboard</span>
-        </a>
-
-        <!-- My Requisitions -->
-        {# TODO: Make notification badge dynamic #}
-        <a
-          class="list-group-item list-group-item-action py-4 ripple {% if request.resolver_match.view_name == 'requisitions:list_my' %}active{% endif %}"
-          aria-current="true"
-          href="{% url 'requisitions:list_my' %}"
-        ><i class="fa-solid fa-user-plus fa-fw me-3 fa-lg"></i><span>My Requisitions</span>
-        </a>
-
-        <!-- Pending -->
-        {# TODO: Make notification badge dynamic #}
-        <a
-          class="list-group-item list-group-item-action py-4 ripple {% if request.resolver_match.view_name == 'requisitions:list_pending' %}active{% endif %}"
-          aria-current="true"
-          href="{% url 'requisitions:list_pending' %}"
-        ><span class="badge rounded-pill badge-notification bg-danger">1</span><i class="fa-solid fa-user-clock fa-fw me-3 fa-lg"></i><span>Pending</span>
-        </a>
-
-        <!-- Users -->
-        <a
-          href="{% url 'users:list' %}"
-          class="list-group-item list-group-item-action py-4 ripple {% if 'users' in request.resolver_match.view_name %}active{% endif %}"
-        ><i class="fas fa-users fa-fw me-3 fa-lg"></i><span>Users</span></a
-        >
-      </div>
-    </div>
-  </nav>
-  <!-- Sidebar -->
-
   <!-- Navbar -->
   <nav
     id="main-navbar"
     class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
   >
     <!-- Container wrapper -->
-    <div class="container-fluid">
+    <div class="container-fluid px-4">
+
       <!-- Toggle button -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#sidebarMenu"
-        aria-controls="sidebarMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Brand -->
+        <a class="navbar-brand me-4" href="#">
+          <img
+            src="{% static "images/material-ui-logo.png" %}"
+            height="40"
+            alt=""
+            loading="lazy"
+          />
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-      <!-- Brand -->
-      <a class="navbar-brand ps-5" href="#">
-        <img
-          src="{% static "images/material-ui-logo.png" %}"
-          height="50"
-          alt=""
-          loading="lazy"
-        />
-      </a>
+          <li class="nav-item me-2">
+            <!-- Dashboard -->
+            <a
+              href="{% url 'dashboard' %}"
+              class="nav-link {% if request.resolver_match.view_name == 'dashboard' %}active{% endif %}"
+              aria-current="true"
+            >
+              <i class="fa-solid fa-chart-line fa-fw me-1 fa-xl"></i>Dashboard
+            </a>
+          </li>
 
-      <!-- Title -->
-      <h1 style="margin-left:auto">{{ title }}</h1>
+          <!-- Requisitions -->
+          <li class="nav-item dropdown me-2">
+            <a class="nav-link dropdown-toggle {% if request.resolver_match.view_name == 'requisitions:list_my' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-sack-dollar fa-fw me-1 fa-xl"></i>Requisitions
+            </a>
+            <!-- Dropdown menu -->
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a
+                  class="dropdown-item"
+                  aria-current="true"
+                  href="{% url 'requisitions:list_my' %}"
+                >My Requisitions
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  aria-current="true"
+                  href="{% url 'requisitions:list_all' %}"
+                >All Requisitions
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Approval Center -->
+          <li class="nav-item me-2">
+            {# TODO: Make notification badge dynamic #}
+            <a
+              class="nav-link {% if request.resolver_match.view_name == 'requisitions:list_pending' %}active{% endif %}"
+              aria-current="true"
+              href="{% url 'requisitions:list_pending' %}"
+            ><span class="badge rounded-pill badge-notification bg-danger">1</span><i class="fa-regular fa-circle-check me-1 fa-xl"></i><span>Approval Center</span>
+            </a>
+          </li>
+
+          <!-- Users -->
+          <li class="nav-item me-2">
+            <a
+              href="{% url 'users:list' %}"
+              class="nav-link {% if 'users' in request.resolver_match.view_name %}active{% endif %}"
+            ><i class="fas fa-users fa-fw me-1 fa-xl"></i><span>Users</span></a
+            >
+          </li>
+
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
 
       <!-- Right links -->
-      <ul class="navbar-nav ms-auto d-flex flex-row">
-        <!-- Icon -->
-        <li class="nav-item me-3 me-lg-0">
-          <a class="nav-link" href="https://github.com/scriptogre/django-requisitions-web-app">
-            <i class="fab fa-github"></i>
-          </a>
-        </li>
-
+      <div class="d-flex align-items-center">
         <!-- Avatar -->
-        <li class="nav-item dropdown">
+        <div class="dropdown">
           <a
-            class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
+            class="dropdown-toggle d-flex align-items-center hidden-arrow"
             href="#"
-            id="navbarDropdownMenuLink"
+            id="navbarDropdownMenuAvatar"
             role="button"
             data-mdb-toggle="dropdown"
             aria-expanded="false"
           >
             <img
-              src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
               class="rounded-circle"
               height="25"
-              alt=""
+              alt="Black and White Portrait of a Man"
               loading="lazy"
             />
           </a>
           <ul
             class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="navbarDropdownMenuLink"
+            aria-labelledby="navbarDropdownMenuAvatar"
           >
             {% if request.user.is_authenticated %}
               <li><a class="dropdown-item" href="{% url 'users:detail' request.user.username %}">{% translate "My Profile" %}</a></li>
-              <li><a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a></li>
               <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a></li>
             {% else %}
               {% if ACCOUNT_ALLOW_REGISTRATION %}
                 <li><a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a></li>
@@ -177,8 +179,9 @@
               <li><a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a></li>
             {% endif %}
           </ul>
-        </li>
-      </ul>
+        </div>
+      </div>
+      <!-- Right elements -->
     </div>
     <!-- Container wrapper -->
   </nav>
