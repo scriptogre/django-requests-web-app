@@ -24,7 +24,13 @@ urlpatterns = [
     # Your stuff: custom urls includes go here
     path(
         "requisitions/",
-        include("purchase_requisitions.requisitionform.urls", namespace="requisitions"),
+        include("purchase_requisitions.requisitions.urls", namespace="requisitions"),
+    ),
+    path(
+        "approval_center/",
+        include(
+            "purchase_requisitions.approvalcenter.urls", namespace="approval_center"
+        ),
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -2,7 +2,7 @@ from factory import SubFactory
 from factory.django import DjangoModelFactory, ImageField
 from faker import Faker
 
-from purchase_requisitions.requisitionform.models import Requisition
+from purchase_requisitions.requisitions.models import Requisition
 from purchase_requisitions.users.tests.factories import UserFactory
 
 fake = Faker()

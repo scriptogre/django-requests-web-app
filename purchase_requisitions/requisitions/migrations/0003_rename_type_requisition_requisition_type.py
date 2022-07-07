@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("requisitionform", "0002_requisition_user"),
+        ("requisitions", "0002_requisition_user"),
     ]
 
     operations = [

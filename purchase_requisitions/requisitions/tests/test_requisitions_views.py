@@ -16,8 +16,8 @@
 import pytest
 from django.test import RequestFactory
 
-from purchase_requisitions.requisitionform.models import Requisition
-from purchase_requisitions.requisitionform.tests.factories import RequisitionFactory
+from purchase_requisitions.requisitions.models import Requisition
+from purchase_requisitions.requisitions.tests.factories import RequisitionFactory
 
 
 @pytest.fixture()
@@ -42,12 +42,10 @@ def already_existing_requisitions():
         ),  # /requisitions/ should always redirect to /requisitions/my/
         ("/requisitions/my/", False, 302),
         ("/requisitions/all/", False, 302),
-        ("/requisitions/pending/", False, 302),
         # Basic User
         ("/requisitions/", True, 301),
         ("/requisitions/my/", True, 200),
         ("/requisitions/all/", True, 403),
-        ("/requisitions/pending/", True, 200),
     ],
 )
 def test_user_access(db, user, client, url, is_authenticated, expected):
@@ -66,7 +64,6 @@ def test_user_access(db, user, client, url, is_authenticated, expected):
         ("/requisitions/", 301),
         ("/requisitions/my/", 200),
         ("/requisitions/all/", 200),
-        ("/requisitions/pending/", 200),
     ],
 )
 def test_admin_access(db, admin_client, url, expected):
@@ -101,17 +98,6 @@ def test_all_requisitions_context(admin_client, already_existing_requisitions):
     """
     context = admin_client.get("/requisitions/all/").context_data
     assert set(context["requisition_list"]) == set(Requisition.objects.all())
-
-
-@pytest.mark.django_db
-def test_pending_requisitions_context(admin_client, already_existing_requisitions):
-    """
-    Checks if Pending Requisitions context contains only pending entries
-    """
-    context = admin_client.get("/requisitions/pending/").context_data
-    assert set(context["requisition_list"]) == set(
-        Requisition.objects.filter(status=Requisition.STATUS.PENDING)
-    )
 
 
 factory = RequestFactory()

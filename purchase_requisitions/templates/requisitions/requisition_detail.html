@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-xl-8 text-center">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width: 150px;"
+               alt="Avatar" />
+          <h5 class="mb-2"><strong>{{ requisition.creator_name }}</strong></h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card card-stepper border border-{% if requisition.status == "APPROVED" %}success{% elif requisition.status == "REJECTED" %}danger{% else %}warning{% endif %}" style="border-radius: 16px;">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <div><p class="text-muted mb-0">Created <span class="fw-bold text-body">{{ requisition.created }}</span></p></div>
+            <span class="badge badge-{% if requisition.status == "APPROVED" %}success{% elif requisition.status == "REJECTED" %}danger{% else %}warning{% endif %} rounded-pill d-inline">{{ requisition.status}}</span>
+            <span class="fw-bold text-body">#{{ requisition.id }}</span>
+          </div>
+        </div>
+
+        <div class="card-body">
+
+          <p class="text-muted mb-2">Expected delivery: <span class="text-body">{{ requisition.est_delivery }}</span></p>
+          <p class="text-muted mb-2">Estimated price: <span class="text-body">€{{ requisition.est_cost }}</span></p>
+          <p class="text-muted mb-2">Type: <span class="text-body">{{ requisition.type }}</span></p>
+          <p class="text-muted mb-2">Description: <span class="text-body">{{ requisition.description }}</span></p>
+          <p class="text-muted mb-2">Reason: <span class="text-body">{{ requisition.reason }}</span></p>
+          <p class="text-muted mb-2">Attachment: <span class="text-body">{{ requisition.attachment }}</span></p>
+        </div>
+        <div class="card-footer">
+          STEPPER
+          <ul class="stepper" data-mdb-stepper="stepper" data-mdb-stepper-type="vertical">
+            <li class="stepper-step stepper-active">
+              <div class="stepper-head">
+                <span class="stepper-head-icon">1</span>
+                <span class="stepper-head-text">Created</span>
+              </div>
+            </li>
+            <li class="stepper-step">
+              <div class="stepper-head">
+                <span class="stepper-head-icon">2</span>
+                <span class="stepper-head-text">LM/PM</span>
+              </div>
+            </li>
+            <li class="stepper-step">
+              <div class="stepper-head">
+                <span class="stepper-head-icon">3</span>
+                <span class="stepper-head-text">CEO</span>
+              </div>
+            </li>
+            <li class="stepper-step">
+              <div class="stepper-head">
+                <span class="stepper-head-icon">3</span>
+                <span class="stepper-head-text">Done</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

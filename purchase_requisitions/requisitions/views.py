@@ -15,9 +15,9 @@ from .forms import CreateRequisitionForm, UpdateRequisitionForm
 from .models import Requisition
 
 
-class RequisitionList(PageTitleMixin, LoginRequiredMixin, ListView):
+class RequisitionListView(PageTitleMixin, LoginRequiredMixin, ListView):
     model = Requisition
-    template_name = "requisitionform/requisition_list/requisition_list.html"
+    template_name = "requisitions/requisition_list.html"
     extra_context = {
         "verbose_fields": {
             field.name: field.verbose_name.title() for field in Requisition._meta.fields
@@ -25,25 +25,18 @@ class RequisitionList(PageTitleMixin, LoginRequiredMixin, ListView):
     }
 
 
-class MyRequisitionsView(RequisitionList):
+class MyRequisitionsView(RequisitionListView):
     title = "My Requisitions"
 
     def get_queryset(self):
         return Requisition.objects.filter(user=self.request.user)
 
 
-class AllRequisitionsView(UserPassesTestMixin, RequisitionList):
+class AllRequisitionsView(UserPassesTestMixin, RequisitionListView):
     title = "All Requisitions"
 
     def test_func(self):
         return self.request.user.is_superuser
-
-
-class ApprovalCenterView(RequisitionList):
-    title = "Approval Center"
-
-    def get_queryset(self):
-        return Requisition.objects.filter(status=Requisition.STATUS.PENDING)
 
 
 class RequisitionCreateView(LoginRequiredMixin, BSModalCreateView):

@@ -1,6 +1,6 @@
 from django.contrib.admin import ModelAdmin, register
 
-from purchase_requisitions.requisitionform.models import Requisition
+from purchase_requisitions.requisitions.models import Requisition
 
 
 @register(Requisition)

@@ -1,7 +1,7 @@
 import pytest
 from factories import RequisitionFactory
 
-from purchase_requisitions.requisitionform.models import Requisition
+from purchase_requisitions.requisitions.models import Requisition
 
 pytestmark = pytest.mark.django_db
 

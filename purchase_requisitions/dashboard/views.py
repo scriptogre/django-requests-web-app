@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.views.generic import ListView
 
-from purchase_requisitions.requisitionform.models import Requisition
+from purchase_requisitions.requisitions.models import Requisition
 from purchase_requisitions.utils.mixins import PageTitleMixin
 
 

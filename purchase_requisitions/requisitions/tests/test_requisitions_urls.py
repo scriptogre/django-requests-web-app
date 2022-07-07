@@ -14,9 +14,9 @@ def test_list_my(requisition):
     assert resolve("/requisitions/my/").view_name == "requisitions:list_my"
 
 
-def test_list_pending(requisition):
-    assert reverse("requisitions:list_pending") == "/requisitions/pending/"
-    assert resolve("/requisitions/pending/").view_name == "requisitions:list_pending"
+def test_approval_center(requisition):
+    assert reverse("approval_center:index") == "/approval_center/"
+    assert resolve("/approval_center/").view_name == "approval_center:index"
 
 
 def test_list_all(requisition):
